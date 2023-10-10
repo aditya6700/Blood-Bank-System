@@ -10,6 +10,9 @@ require('./src/db/conn');
 const app = express();
 const port = 1432 || process.env.PORT;
 
+// parsing incoming requesting to json
+app.use(express.json());
+
 app.get('/', (req, res) => {
     res.send('home page');
 });
@@ -24,5 +27,5 @@ app.get('*', (req, res) => {
 
 // start server on user defined port
 app.listen(port, () => {
-    console.log(`listening on port ${port}`);
+    console.log(`listening on port: ${port}`);
 });

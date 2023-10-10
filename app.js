@@ -17,6 +17,11 @@ app.get('/', (req, res) => {
 // congigure routes
 app.use('/api', routes);
 
+// undefined route for get
+app.get('*', (req, res) => {
+    res.status(404).send(`undefined get request: ${req.url}`);
+});
+
 // start server on user defined port
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

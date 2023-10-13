@@ -14,9 +14,53 @@ export const Register = () => {
     setUserDetails({ ...userDetails, [name]: value });
   }
 
-  const registerUser = (event) => {
+  const validateUserDetails = () => {
+    const { name, email, password, cpassword } = userDetails;
+    console.log(userDetails);
+
+    let validated = true;
+
+    const nameRegex = /^[a-zA-z0-9_ ]{3,15}$/;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.!@#$%^&*-])[a-zA-Z\d.!@#$%^&*-]{8,16}$/;
+
+
+    if (!nameRegex.test(name)) {
+      alert(
+				"Username should be greater than 3 chars. Special chars allowed space and underscore",
+      );
+      validated = false;
+    }
+
+    if (!emailRegex.test(email)) {
+      alert(
+				"Invalid email",
+      );
+      validated = false;
+    }
+
+    if (!passwordRegex.test(password)) {
+      alert(
+				"Password should be min of 8 and max 16. Should follow standard password rules",
+      );
+    validated = false;
+    }
+
+    if (!password.match(cpassword)) {
+      alert(
+				"Passwords does not match",
+      );
+      validated = false;
+    }
+
+    return validated;
+  }
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(userDetails)
+    if (validateUserDetails()) {
+      alert('form validated')
+    }
   }
 
   return (
@@ -31,7 +75,7 @@ export const Register = () => {
                 <div className="mb-3 mt-4">
                   <h2 className="fw-bold mb-2 text-uppercase">BLOOD BANK</h2>
                   <p className="mb-3">Please enter your details to become a Transfuser!</p>
-                  <Form className="mb-3" onSubmit={registerUser}>
+                  <Form className="mb-3" onSubmit={handleSubmit}>
                       
                     <Form.Group className="mb-3">
                       <FloatingLabel controlId="name" label="Name" >

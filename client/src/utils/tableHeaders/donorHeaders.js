@@ -31,7 +31,8 @@ export const donorColumns = [
     },
     {
       dataField: "status",
-      text: "Status",
+        text: "Status",
+        sort: true,
       headerStyle: {
         backgroundColor: "#DEDADA"
       },

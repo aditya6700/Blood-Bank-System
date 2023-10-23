@@ -5,8 +5,8 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import { donorsListRoute } from '../../utils/ApiRoutes';
 import { donorColumns } from '../../utils/tableHeaders/donorHeaders';
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from "react-bootstrap-table2-paginator";
-import { Container } from 'react-bootstrap';
+import paginationFactory, { PaginationListStandalone, PaginationProvider } from "react-bootstrap-table2-paginator";
+import { Container, Row } from 'react-bootstrap';
 
 export const Donor = () => {
 
@@ -19,14 +19,14 @@ export const Donor = () => {
       const res = await axios.get(donorsListRoute, {
         withCredentials: true,
         headers: {
-          "Content-Type": "application/json"
-        }
+          'Content-Type': 'application/json',
+        },
       });
 
       if (res.data.success) {
         setDonorList(res.data.donors);
         setLoading(false);
-        console.log(res.data.donors);
+        // console.log(res.data.donors);
       }
     }
     catch (err) {
@@ -42,25 +42,39 @@ export const Donor = () => {
     getDonors();
   }, [getDonors, navigate]);
 
+  const paginationOptions = {
+    custom: true,
+    totalSize: donorList.length
+  };
+ 
   return (
-    <>
+    <Container className="h-100">
       {
         loading ? (
           <LoadingSpinner />
-        ) :
-          (
-            <Container className='h-100 px-5 d-flex flex-column'>
-              <div style={{ color: "#4682B4" }}>
-                <BootstrapTable
-                  keyField="_id"
-                  data={donorList}
-                  columns={donorColumns}
-                  pagination={paginationFactory()}
-                />
-              </div>
-            </Container>
+        ) : (
+          <Row className="h-100 px-lg-5 pt-4 d-flex flex-column row-gap-3">
+            <h3 className="text-center fs-1">Donors ready to Tranfuse</h3>
+            <div style={{ color: '#4682B4' }} className='overflow-auto'>
+              <PaginationProvider pagination={paginationFactory(paginationOptions)} >
+                {
+                  ({ paginationProps, paginationTableProps }) => (
+                    <div>
+                      <PaginationListStandalone {...paginationProps} />
+                      <BootstrapTable
+                        keyField="_id"
+                        data={donorList}
+                        columns={donorColumns}
+                        {...paginationTableProps}
+                      />
+                    </div>
+                  )
+                }
+              </PaginationProvider>
+            </div>
+          </Row>
         )
       }
-    </>
-  )
-}
+    </Container>
+  );
+};

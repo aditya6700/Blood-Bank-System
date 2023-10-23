@@ -1,4 +1,5 @@
 import { Button } from "react-bootstrap";
+import moment from 'moment';
 
 export const donorColumns = [
   {
@@ -31,6 +32,7 @@ export const donorColumns = [
     headerStyle: {
       backgroundColor: "#DEDADA"
     },
+    formatter: (cell) =>  moment(cell).format('MMMM Do YYYY')
   },
   {
     dataField: "status",

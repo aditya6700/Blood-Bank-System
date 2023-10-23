@@ -44,6 +44,7 @@ export const Patient = () => {
 
   const paginationOptions = {
     custom: true,
+    sizePerPage: 8,
     totalSize: patientList.length
   };
  

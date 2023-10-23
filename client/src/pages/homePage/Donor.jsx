@@ -44,6 +44,7 @@ export const Donor = () => {
 
   const paginationOptions = {
     custom: true,
+    sizePerPage: 8,
     totalSize: donorList.length
   };
  

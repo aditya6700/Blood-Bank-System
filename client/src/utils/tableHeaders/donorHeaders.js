@@ -2,23 +2,38 @@ export const donorColumns = [
     {
       dataField: "_id",
       text: "Id",
-      sort: false
+      sort: false,
+      headerStyle: {
+        backgroundColor: "#DEDADA"
+      }
     },
     {
       dataField: "name",
       text: "Name",
-      sort: true
+      sort: true,
+      headerStyle: {
+        backgroundColor: "#DEDADA"
+      }
     },
     {
       dataField: "email",
       text: "Email",
+      headerStyle: {
+        backgroundColor: "#DEDADA"
+      },
     },
     {
       dataField: "registerDate",
       text: "Registerd On",
+      headerStyle: {
+        backgroundColor: "#DEDADA"
+      },
     },
     {
       dataField: "status",
       text: "Status",
+      headerStyle: {
+        backgroundColor: "#DEDADA"
+      },
     }
   ];

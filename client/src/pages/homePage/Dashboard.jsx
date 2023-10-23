@@ -58,7 +58,7 @@ export default function Dashboard() {
         (
           <>
             <Container className='h-100 px-5 d-flex flex-column'>
-              <Row className='overview'>
+              <Row className='overview mt-3'>
                   <Row xs={1} md={2} lg={5} className="g-4 mt-0">
                     {
                       Object.keys(miscStats).map((data, index) => ( 
@@ -82,7 +82,7 @@ export default function Dashboard() {
                     }
                   </Row>
               </Row>
-              <Row className='blood-groups my-5 pt-5'>
+              <Row className='blood-groups my-5'>
                   <Row xs={1} md={2} lg={4} className="g-5 mt-0">
                       {
                         stock.map((data, index) => (

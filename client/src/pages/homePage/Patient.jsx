@@ -66,6 +66,7 @@ export const Patient = () => {
                         data={patientList}
                         columns={patientColumns}
                         {...paginationTableProps}
+                        hover
                       />
                     </div>
                   )

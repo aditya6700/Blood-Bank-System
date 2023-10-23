@@ -66,6 +66,7 @@ export const Donor = () => {
                         data={donorList}
                         columns={donorColumns}
                         {...paginationTableProps}
+                        hover
                       />
                     </div>
                   )

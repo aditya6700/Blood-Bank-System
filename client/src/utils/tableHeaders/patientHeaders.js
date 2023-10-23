@@ -1,10 +1,14 @@
+import { Button } from "react-bootstrap";
+
 export const patientColumns = [
   {
     dataField: "_id",
     text: "Id",
     headerStyle: {
       backgroundColor: "#DEDADA"
-    }
+    },
+    style: {  overflow: 'hidden',
+      textOverflow: 'ellipsis'}
   },
   {
     dataField: "name",
@@ -35,10 +39,24 @@ export const patientColumns = [
     headerStyle: {
       backgroundColor: "#DEDADA"
     },
-    formatter: (cell) =>(  
+    formatter: (cell) => (  
       <span>
         <strong style={ { color: `${cell === 'rejected' ? 'red' : 'green'}`, textTransform: 'capitalize'} }> { cell } </strong>
       </span>
     )
+  },
+  {
+    dataField: "Actions",
+    isDummyField: true,
+    text: "Actions",
+    headerStyle: {
+      backgroundColor: "#DEDADA",
+      width: '10%'
+    },
+    formatter: (cell, row) => {
+      return (  <>
+          <Button variant={row.status === 'rejected' ? 'success': 'danger'} size="sm">{ row.status === 'rejected' ? 'Accept' : 'Reject' }</Button>
+      </>
+    )}
   }
 ];

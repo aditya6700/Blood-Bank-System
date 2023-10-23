@@ -53,8 +53,8 @@ export const Patient = () => {
         loading ? (
           <LoadingSpinner />
         ) : (
-          <Row className="h-100 px-lg-5 pt-4 d-flex flex-column row-gap-3">
-            <h3 className="text-center fs-1">Patients waiting for Transfusion</h3>
+          <Row className="h-100 px-lg-5 pt-4 d-flex flex-column">
+            <h3 className="text-center fs-1 mb-3 text-capitalize">Patients waiting for Transfusion</h3>
             <div style={{ color: '#4682B4' }} className='overflow-auto'>
               <PaginationProvider pagination={paginationFactory(paginationOptions)} >
                 {
@@ -72,7 +72,7 @@ export const Patient = () => {
                 }
               </PaginationProvider>
             </div>
-            <p className="m-0">Note: You can sort by Name and Status</p> 
+            <p className="m-0"> <span style={{ fontWeight: 'bold', color: 'red'}}>Note:</span>  You can sort by Name and Status</p> 
           </Row>
         )
       }

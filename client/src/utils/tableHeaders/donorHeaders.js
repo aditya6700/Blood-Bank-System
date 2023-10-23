@@ -2,7 +2,6 @@ export const donorColumns = [
     {
       dataField: "_id",
       text: "Id",
-      sort: false,
       headerStyle: {
         backgroundColor: "#DEDADA"
       }

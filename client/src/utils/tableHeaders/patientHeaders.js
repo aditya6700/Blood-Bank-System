@@ -2,7 +2,6 @@ export const patientColumns = [
     {
       dataField: "_id",
       text: "Id",
-      sort: false,
       headerStyle: {
         backgroundColor: "#DEDADA"
       }

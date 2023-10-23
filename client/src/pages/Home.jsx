@@ -8,6 +8,7 @@ import { Sidebar } from '../components/Sidebar';
 import Dashboard from './homePage/Dashboard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Donor } from './homePage/Donor';
+import { Patient } from './homePage/Patient';
 
 export const Home = () => {
 
@@ -56,7 +57,7 @@ export const Home = () => {
     }
     else if (currentPage === 'patient'){
       return (
-        <h1>Patient Page</h1>
+        <Patient />
       )
     }
     else if (currentPage === 'inventory') {

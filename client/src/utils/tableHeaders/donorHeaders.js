@@ -30,10 +30,15 @@ export const donorColumns = [
     },
     {
       dataField: "status",
-        text: "Status",
-        sort: true,
+      text: "Status",
+      sort: true,
       headerStyle: {
         backgroundColor: "#DEDADA"
       },
+      formatter: (cell) =>(  
+        <span>
+          <strong style={ { color: `${cell === 'rejected' ? 'red' : 'green'}`, textTransform: 'capitalize'} }> { cell } </strong>
+        </span>
+      )
     }
   ];

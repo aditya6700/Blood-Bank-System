@@ -12,7 +12,7 @@ export default function Dashboard() {
 
   const [loading, setLoading] = useState(true);
   const [stock, setStock] = useState({});
-  const [miscStats, setmiscStats] = useState({});
+  const [miscStats, setMiscStats] = useState({});
 
   const getStock = useCallback(async () => {
     try {
@@ -31,15 +31,16 @@ export default function Dashboard() {
       });
 
       setStock(stockRes.data.inventory);
-      setmiscStats(miscStatRes.data.miscStats);
-      setLoading(false);
+      setMiscStats(miscStatRes.data.miscStats);
     }
     catch (err) {
       console.log(err.response.data);
-      setLoading(false);
       if (!err.response.data.status) {
         navigate('/error');
       }
+    }
+    finally {
+      setLoading(false);
     }
   }, [navigate]);
 

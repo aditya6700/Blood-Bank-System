@@ -25,16 +25,16 @@ export const Patient = () => {
 
       if (res.data.success) {
         setPatientList(res.data.patients);
-        setLoading(false);
-        // console.log(res.data.donors);
       }
     }
     catch (err) {
       console.log(err.response);
-      setLoading(false);
       if (!err.response.data.success) {
         navigate('/error');
       }
+    }
+    finally {
+      setLoading(false);
     }
   }, [navigate])
 

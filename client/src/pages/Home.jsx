@@ -30,14 +30,15 @@ export const Home = () => {
       console.log(res.data);
       setCurrentUser(res.data.user);
       setIsAuthenticated(true);
-      setLoading(false);
     }
     catch (err) {
       console.log(err.response.data);
-      setLoading(false);
       if (!err.response.data.status) {
         navigate('/login');
       }
+    }
+    finally {
+      setLoading(false);
     }
   }, [navigate]);
 

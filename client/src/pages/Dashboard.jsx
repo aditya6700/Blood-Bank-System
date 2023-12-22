@@ -59,15 +59,20 @@ export default function Dashboard() {
           <LoadingSpinner />
         ) :
         (
-          <Container className='px-5 d-flex flex-column ' style={{ height: '100vh', overflowY: 'auto' }} >
-            <Row className='overview mt-3'>
-              <Row xs={1} md={2} lg={5} className="g-4 mt-0">
-                <MiscStatsCard miscStats={miscStats} />
-              </Row>
+          <Container className='p-5 d-flex flex-column ' style={{ height: '100vh', overflowY: 'auto' }} >
+            <Row>
+              <h3 className="text-left fs-1 mb-3 text-capitalize">Dashboard</h3>
             </Row>
-            <Row className='blood-groups my-5'>
-              <Row xs={1} md={2} lg={4} className="g-4 mt-0">
-                <BloodCards stock={stock} />
+            <Row>
+              <Row className='overview mt-3'>
+                <Row xs={1} md={2} lg={5} className="g-4 mt-0">
+                  <MiscStatsCard miscStats={miscStats} />
+                </Row>
+              </Row>
+              <Row className='blood-groups my-5'>
+                <Row xs={1} md={2} lg={4} className="g-4 mt-0">
+                  <BloodCards stock={stock} />
+                </Row>
               </Row>
             </Row>
           </Container>  

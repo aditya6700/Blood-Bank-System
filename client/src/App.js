@@ -19,6 +19,7 @@ import { RequestBlood } from './pages/bloodRequests/RequestBlood';
 import { useAuthContext } from './hooks/useAuthContext';
 import LoadingSpinner from './components/LoadingSpinner';
 import { Profile } from './components/Profile';
+import { ForgotPassword } from './pages/ForgotPassword';
 
 export default function App() {
 
@@ -47,6 +48,7 @@ export default function App() {
             <Route path='/blood-request'    element={user ? <RequestBlood /> : <Navigate to="/" />} />
             <Route path='/request-history'  element={user ? <RequestHistory /> : <Navigate to="/" />} />
             <Route path='/settings/profile'  element={user ? <Profile /> : <Navigate to="/" />} />
+            <Route path='/forgot-password'  element={!user ? <ForgotPassword /> : <Navigate to="/dashboard" />} />
             <Route path='*'          element={<Error />} />
           </Routes>
         </SidebarContainer>

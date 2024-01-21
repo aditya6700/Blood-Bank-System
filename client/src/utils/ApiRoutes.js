@@ -18,3 +18,4 @@ export const bloodDonationsHistoryRoute = '/api/history/donations';
 export const userDashboardRoute = '/api/history/dashboard-stats';
 export const userUpdateRoute = '/api/user/updateProfile';
 export const changePasswordRoute = '/api/user/changePassword';
+export const resetPasswordRoute = '/api/user/resetPassword';

@@ -1,25 +1,42 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { resetPasswordRoute } from '../utils/ApiRoutes';
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const [securityQuestion, setSecurityQuestion] = useState(''); 
+  const [securityQuestion, setSecurityQuestion] = useState('In which city were you born?'); 
   const [securityAnswer, setSecurityAnswer] = useState('');
   const [showSecurityQuestion, setShowSecurityQuestion] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [showNewPassword, setShowNewPassword] = useState('');
+  const [userData, setUserData] = useState({});
 
-  const handleEmailSubmit = (e) => {
+  const api = axios.create({
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const { data } = await api.post(`${resetPasswordRoute}/email`, { email });
+      if (data.success) {
+        setUserData(data.validUser);
+        setShowSecurityQuestion(true);
+      }
+    } catch (error) {
+      alert(error.response.data.message);
+    }
     
-    setSecurityQuestion('What is your favorite color?');
-    setShowSecurityQuestion(true);
   };
 
   const handleSecurityQuestionSubmit = (e) => {
     e.preventDefault();
    
-    if (securityAnswer.toLowerCase() === 'blue') {
+    if (securityAnswer.toLowerCase() === userData.city) {
       setSecurityQuestion(''); 
       setShowSecurityQuestion(false);
       setShowNewPassword(true);

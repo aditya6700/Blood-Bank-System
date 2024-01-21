@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { resetPasswordRoute } from '../utils/ApiRoutes';
+import { useNavigate } from "react-router-dom";
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -9,8 +10,10 @@ export const ForgotPassword = () => {
   const [securityAnswer, setSecurityAnswer] = useState('');
   const [showSecurityQuestion, setShowSecurityQuestion] = useState(false);
   const [newPassword, setNewPassword] = useState('');
+  const [confPassword, setConfPassword] = useState('');
   const [showNewPassword, setShowNewPassword] = useState('');
   const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
 
   const api = axios.create({
     withCredentials: true,
@@ -45,10 +48,32 @@ export const ForgotPassword = () => {
     }
   };
 
-  const handleNewPasswordSubmit = (e) => {
+  const handleNewPasswordSubmit = async (e) => {
     e.preventDefault();
-    
-    alert('New password submitted: ' + newPassword);
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.!@#$%^&*-])[a-zA-Z\d.!@#$%^&*-]{8,16}$/;
+
+    if (newPassword !== confPassword) {
+      alert("Passwords are not same");
+    }
+    else {
+      if (!passwordRegex.test(newPassword)) {
+        alert("Password is not strong");
+        return;
+      }
+
+      try {
+        const { data } = await api.post(`${resetPasswordRoute}/password`, userData);
+        if (data.success) {
+          alert(data.message);
+          navigate("/");
+        }
+      } catch (error) {
+        setNewPassword('');
+        setConfPassword('');
+        alert(error.response.data.message);
+      }
+
+    }
   };
 
   return (
@@ -97,13 +122,23 @@ export const ForgotPassword = () => {
 
           {showNewPassword && !showSecurityQuestion && (
             <Form onSubmit={handleNewPasswordSubmit}>
-              <Form.Group controlId="formNewPassword">
+              <Form.Group className='mb-3' controlId="formNewPassword">
                 <Form.Label>New Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Enter your new password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                />
+              </Form.Group>
+              <Form.Group controlId="formConfirmPassword">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Re-Enter your new password"
+                  value={confPassword}
+                  onChange={(e) => setConfPassword(e.target.value)}
                   required
                 />
               </Form.Group>

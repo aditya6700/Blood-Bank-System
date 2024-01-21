@@ -42,7 +42,7 @@ export default function LoginModal({ handleUser }) {
 
               <div className="mb-3 ps-1">
                 <p className="small">
-                  <Link className="text-danger" to='#' >Forgot password?</Link>
+                  <Link className="text-danger" to='/forgot-password' >Forgot password?</Link>
                 </p>
               </div>
 

@@ -6,10 +6,10 @@ import AP from '../../assets/AP.png'
 import AM from '../../assets/AM.png'
 import BP from '../../assets/BP.png'
 import BM from '../../assets/BM.png'
-import ABP from '../../assets/ABP.png'
-import ABM from '../../assets/ABM.png'
 import OP from '../../assets/OP.png'
 import OM from '../../assets/OM.png'
+import ABP from '../../assets/ABP.png'
+import ABM from '../../assets/ABM.png'
 
 const BLOODGROUPS = [
   { name: "A+", image: AP },
@@ -25,7 +25,7 @@ const BLOODGROUPS = [
 export default function RegisterModal({ handleUser }) {
 
   const [userDetails, setUserDetails] = useState({
-    name: "", email: "", password: "", cpassword: "", userType: "", bloodGroup: ""
+    name: "", email: "", password: "", cpassword: "", userType: "", bloodGroup: "", city: ""
   });
 
   const handleChange = (event) => {
@@ -58,20 +58,6 @@ export default function RegisterModal({ handleUser }) {
             </FloatingLabel> 
           </Form.Group>
 
-          <Form.Group as={Col} controlId="bloodGroup">
-              <div className="d-flex flex-column mb-3  align-items-start flex-md-row justify-content-md-around">
-                <Form.Label className="text-center"> Blood Group </Form.Label>
-              {
-                BLOODGROUPS.map((blood, index) => {
-                  return (
-                    <Form.Check key={index} type="radio" value={blood.name} label=<Image src={blood.image} height={45} /> name="bloodGroup" id={blood.name}
-                  checked={userDetails.bloodGroup === blood.name} onChange={handleChange} />
-                  )
-                })
-              }
-              </div>
-            </Form.Group>
-
           <Row className="mb-3 align-items-center">
             <Form.Group className="mb-3" as={Col}>
               <FloatingLabel controlId="email" label="Email address"  >
@@ -90,6 +76,20 @@ export default function RegisterModal({ handleUser }) {
             </Form.Group>
           </Row>
 
+          <Form.Group as={Col} controlId="bloodGroup">
+            <div className="d-flex flex-column mb-3  align-items-start flex-md-row justify-content-md-around">
+              <Form.Label className="text-center"> Blood Group </Form.Label>
+            {
+              BLOODGROUPS.map((blood, index) => {
+                return (
+                  <Form.Check key={index} type="radio" value={blood.name} label=<Image src={blood.image} height={45} /> name="bloodGroup" id={blood.name}
+                checked={userDetails.bloodGroup === blood.name} onChange={handleChange} />
+                )
+              })
+            }
+            </div>
+          </Form.Group>
+
           <Row className="mb-2">
             <Form.Group className="mb-3" as={Col}>
               <FloatingLabel controlId="password" label="Password" >
@@ -103,6 +103,12 @@ export default function RegisterModal({ handleUser }) {
               </FloatingLabel> 
             </Form.Group>
           </Row>
+
+          <Form.Group className="mb-3">
+            <FloatingLabel controlId="city" label="In which city were you born?" >
+              <Form.Control className='border-2' type="text"  placeholder="securityAnswer" name="city" onChange={handleChange} required />
+            </FloatingLabel> 
+          </Form.Group>
 
           <div className="d-grid">
             <Button variant="danger" type="submit" disabled={isLoading} >

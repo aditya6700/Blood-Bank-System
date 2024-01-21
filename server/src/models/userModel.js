@@ -33,6 +33,11 @@ const userSchema = mongoose.Schema({
         require: false,
         unique: true
     },
+    city: {
+        type: String,
+        require: true,
+        unique: false
+    },
     userType: {
         type: String,
         require: true,

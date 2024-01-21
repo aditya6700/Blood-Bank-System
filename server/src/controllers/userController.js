@@ -4,12 +4,17 @@ const bcrypt = require('bcryptjs');
 // register route
 module.exports.register = async (req, res) => {
     // object destructuring
-    const { name, email, password, cpassword, userType, bloodGroup } = req.body;
+    const { name, email, password, cpassword, userType, bloodGroup, city } = req.body;
 
     // basic validation
     if (!name || !email || !password || !cpassword || !userType || !bloodGroup) {
         return res.status(422).json({
             message: "Every field must be filled", success: false
+        });
+    }
+    else if (!city) {
+        return res.status(422).json({
+            message: "Security Question is required", success: false
         });
     }
     else if (password !== cpassword) {
@@ -29,7 +34,7 @@ module.exports.register = async (req, res) => {
             });
         }
 
-        const user = new Users({ name, email, password, cpassword, userType, bloodGroup, status: 'pending' });
+        const user = new Users({ name, email, password, cpassword, userType, city, bloodGroup, status: 'pending' });
         const registerdUser = await user.save();
 
         res.status(201).json({

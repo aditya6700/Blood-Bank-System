@@ -204,3 +204,38 @@ module.exports.changePassword = async (req,res) => {
         });
     }
 }
+
+// reset password route
+module.exports.resetPassword = async (req,res) => {
+    const action = req.params.action;
+    let message = 'no action'
+    try {
+
+        switch (action) {
+            case 'email':
+                message = 'email verified'
+                break;
+            case 'security':
+                message = 'security question verified'
+                break;
+            case 'password':
+                message = 'password changed'
+                break;
+            default:
+                break;
+        }
+
+        return res.status(201).json({
+            message,
+            success: true
+        });
+
+    } catch (error) {
+        return res.status(404).json({
+            message: 'reset password failed',
+            success: false,
+            error: error.message
+        });
+    }
+}
+

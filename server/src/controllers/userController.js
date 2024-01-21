@@ -206,20 +206,32 @@ module.exports.changePassword = async (req,res) => {
 }
 
 // reset password route
-module.exports.resetPassword = async (req,res) => {
+module.exports.resetPassword = async (req, res) => {
+    const { email, _id, password } = req.body;
     const action = req.params.action;
-    let message = 'no action'
+    let message = 'unknown action';
+    let success = false;
+    let validUser = {};
+
     try {
 
         switch (action) {
             case 'email':
-                message = 'email verified'
-                break;
-            case 'security':
-                message = 'security question verified'
+                validUser = await Users.findOne({ email }, { _id: 1, email: 1, city: 1 });
+                if (validUser) {
+                    message = 'email verified'
+                    success = true
+                } else {
+                    return res.status(404).json({
+                        message: 'invalid user',
+                        success: false
+                    });
+                }
                 break;
             case 'password':
+                await Users.findOneAndUpdate({ _id }, { password, cpassword: password });
                 message = 'password changed'
+                success = true;
                 break;
             default:
                 break;
@@ -227,6 +239,7 @@ module.exports.resetPassword = async (req,res) => {
 
         return res.status(201).json({
             message,
+            validUser,
             success: true
         });
 

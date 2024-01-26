@@ -221,7 +221,7 @@ body::-webkit-scrollbar-thumb {
 .patient-dash .img-container .text-on-image {
   position: absolute;
   left: 65%;
-  bottom: 27%;
+  bottom: 24%;
   color: #fff;
   font-weight: bold;
   width: 150px;
@@ -230,4 +230,20 @@ body::-webkit-scrollbar-thumb {
 .patient-dash .img-container .unit-count {
   font-size: 4rem;
   color: #000;
+}
+
+.donations-list {
+  overflow-y: scroll;
+  max-height: 280px;
+}
+
+.donations-list::-webkit-scrollbar {
+  width: 0.2rem;
+  /* display: none; */
+}
+
+.donations-list::-webkit-scrollbar-thumb {
+  background-color: #58000039;
+  width: 0.1rem;
+  border-radius: 1rem;
 }

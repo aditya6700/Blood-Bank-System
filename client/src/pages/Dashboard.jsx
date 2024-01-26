@@ -78,7 +78,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Container className='p-5 d-flex flex-column ' style={{ height: '100vh', overflowY: 'auto' }} >
+      <Container className='p-5 d-flex flex-column ' style={{ height: '100vh', overflowY: 'hidden' }} >
         <Row>
           <h3 className="text-left fs-1 mb-3 text-capitalize">Dashboard</h3>
         </Row>

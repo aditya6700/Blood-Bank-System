@@ -247,3 +247,24 @@ body::-webkit-scrollbar-thumb {
   width: 0.1rem;
   border-radius: 1rem;
 }
+
+.faq-container {
+  overflow-y: scroll;
+  max-height: 70vh;
+}
+
+.faq-container::-webkit-scrollbar {
+  width: 0.2rem;
+  /* display: none; */
+}
+
+.faq-container::-webkit-scrollbar-thumb {
+  background-color: #58000039;
+  width: 0.1rem;
+  border-radius: 1rem;
+}
+
+
+.border-test {
+  border: 2px solid red;
+}

@@ -36,43 +36,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-.dev-card{
-  height: 350px !important;
-  border-radius: 1rem !important;
-}
-
-.dev-header{
-  background-image: url(https://developer.salesforce.com/resources2/career2017/images/header-bg-2.svg?v=2);
-  background-position: right -2px top -15px;
-  height: 150px;
-  border-radius: 1rem 1rem 0 0 !important;
-}
-
-.dev-header img {
-  height: 150px;
-  width: 150px;
-  position: relative;
-  top: 15px;
-}
-
 .landing-page{
   width: 100%;
   height: 100vh;
   background: url('landingPage.png') fixed center;
   background-size: cover;
 }
-
-/* .my-container{
-  border: 1px solid blue;
-}
-
-.my-row {
-  border: 1px solid black;
-}
-
-.my-col {
-  border: 1px solid green;
-} */
 
 .landing-wrapper .landing-title {
   font-size: 74px;
@@ -114,7 +83,6 @@ body::-webkit-scrollbar-thumb {
   background: rgb(0, 7, 61);
   color: white;
   height: 100vh;
-  /* overflow-y: auto; */
 }
 
 .top_section {
@@ -267,4 +235,114 @@ body::-webkit-scrollbar-thumb {
 
 .border-test {
   border: 2px solid red;
+}
+.border-test1 {
+  border: 2px solid green;
+}
+.border-test2 {
+  border: 2px solid blue;
+}
+
+.slide-container{
+  /* max-width: 1120px; */
+  width: 100%;
+  padding: 40px 0;
+}
+
+.slide-content{
+  margin: 0 40px;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.dev-card{
+  border-radius: 25px !important;
+  background-color: #FFF;
+}
+
+.image-content,
+.card-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+  height: 200px;
+  justify-content: space-around;
+}
+.image-content{
+  position: relative;
+  row-gap: 5px;
+  padding: 25px 0;
+}
+.overlay{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #4070F4;
+  border-radius: 25px 25px 0 25px;
+}
+.overlay::before,
+.overlay::after{
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  height: 40px;
+  width: 40px;
+  background-color: #4070F4;
+}
+
+.overlay::after{
+  border-radius: 0 25px 0 0;
+  background-color: #FFF;
+}
+.card-image{
+  position: relative;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background: #FFF;
+  padding: 3px;
+}
+
+.card-image .card-img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #4070F4;
+}
+
+.name{
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  flex: 0 0 auto;
+}
+.description{
+  font-size: 14px;
+  color: #707070;
+  text-align: center;
+  flex: 1; 
+}
+
+.button{
+  border: none;
+  font-size: 16px;
+  color: #FFF;
+  padding: 8px 16px;
+  background-color: #4070F4;
+  border-radius: 6px;
+  margin: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 0 0 auto;
+}
+.button:hover{
+  background: #265DF2;
+}
+.swiper-pagination {
+  position: unset !important;
 }

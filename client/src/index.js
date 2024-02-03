@@ -16,6 +16,9 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 // Importing react bootstrap table2 paginator CSS
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
+// Importing swiper CSS
+import 'swiper/css/bundle';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

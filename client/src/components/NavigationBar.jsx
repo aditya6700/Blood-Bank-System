@@ -2,22 +2,27 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {Container, Nav, Navbar} from 'react-bootstrap';
 import { Logout } from './Logout';
+import { useAuthContext } from '../hooks/useAuthContext';
 
-export default function NavigationBar({isAuthenticated, userId}) {
+export default function NavigationBar() {
+  
+  const { user } = useAuthContext();
 
   const LoginLogout = () => {
-    if (isAuthenticated) {
+    if (user) {
       return (
         <>
-          <Logout userId={userId} />
+          <Navbar.Text className="nav-link d-flex flex-row text-capitalize"><span className="fas fa-user me-2 fs-5"></span> {user.userType}</Navbar.Text>
+          <Navbar.Text className='fw-bold'>{user.name}</Navbar.Text>
+          <Logout />
         </>
       )
     }
     else {
       return (
         <>
-          <NavLink className="nav-link" to="/register">Register</NavLink>
-          <NavLink className="nav-link" to="/login">Login</NavLink>
+          {/* <NavLink className="nav-link" to="/register">Register</NavLink>
+          <NavLink className="nav-link" to="/login">Login</NavLink> */}
         </>
       )
     }
@@ -25,15 +30,17 @@ export default function NavigationBar({isAuthenticated, userId}) {
   
   return (
     <>
-      <Navbar collapseOnSelect expand="md" bg="primary" data-bs-theme="dark">
-      <Container>
+      <Navbar className='my-navbar' collapseOnSelect expand="md" sticky="top">
+      <Container fluid className='mx-3' >
         <Navbar.Brand as={NavLink} to='/' className='fw-bold'>Transfuse Now</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav>
             <NavLink className="nav-link" to="/about">About</NavLink>
             <NavLink className="nav-link" to="/faq">FAQ</NavLink>
-            <LoginLogout />  
+          </Nav>
+          <Nav className='ms-auto'>
+            <LoginLogout />
           </Nav>
         </Navbar.Collapse>
       </Container>

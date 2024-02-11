@@ -1,3 +1,4 @@
+const RequestHistory = require("../models/requestHistoryModel");
 const Users = require("../models/userModel");
 
 // user status update route
@@ -30,7 +31,7 @@ module.exports.getDonors = async (req,res) => {
                 name: 1,
                 email: 1,
                 status: 1,
-                registerDate: 1
+                updatedAt: 1
             }
         );
         res.status(200).json({
@@ -56,7 +57,7 @@ module.exports.getPatients = async (req,res) => {
                 name: 1,
                 email: 1,
                 status: 1,
-                registerDate: 1
+                updatedAt: 1
             }
         );
         res.status(200).json({
@@ -68,6 +69,74 @@ module.exports.getPatients = async (req,res) => {
     catch (error) {
         res.status(422).json({
             message: 'Failed to fetch patients list',
+            success: false,
+            error: error.message
+        });
+    }
+}
+
+module.exports.getDonationsList = async (req,res) => {
+    try {
+        const donationsList = await RequestHistory.find({ type: 'donate', userType: 'donor' }).populate({
+            path: 'user',
+            select: 'name',
+        });
+        
+        const fomattedDonationsList = donationsList.map((donation) => ({
+            _id: donation._id,
+            name: donation.user.name,
+            bloodGroup: donation.bloodGroup,
+            quantity: donation.quantity,
+            status: donation.status,
+            disease: donation.disease,
+            updatedAt: donation.updatedAt
+        }));
+  
+        res.status(200).json({
+            message: 'Donations list fetched succesfully',
+            success: true,
+            donationsList: fomattedDonationsList
+        });
+    }
+    catch (error) {
+        res.status(422).json({
+            message: 'Failed to fetch donations list',
+            success: false,
+            error: error.message
+        });
+    }
+}
+
+module.exports.getRequestsList = async (req, res) => {
+    let requestsList = [];
+    try {
+        let tempRequestsList = await RequestHistory.find({ type: 'request' }).populate({
+            path: 'user',
+            select: 'name', 
+        });
+
+        const formattedRequestsList = tempRequestsList.map((request) => ({
+            _id: request._id,
+            name: request.user.name,
+            bloodGroup: request.bloodGroup,
+            quantity: request.quantity,
+            status: request.status,
+            disease: request.disease,
+            updatedAt: request.updatedAt,
+            userType: request.userType
+        }));
+
+        requestsList = [...formattedRequestsList];
+  
+        res.status(200).json({
+            message: 'Requests list fetched succesfully',
+            success: true,
+            requestsList
+        });
+    }
+    catch (error) {
+        res.status(422).json({
+            message: 'Failed to fetch requests list',
             success: false,
             error: error.message
         });

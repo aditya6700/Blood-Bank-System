@@ -1,6 +1,5 @@
-const DonorRequestHistory = require("../models/donorRequestModel");
 const Inventory = require("../models/inventoryModel");
-const PatientRequestHistory = require("../models/patientRequestModel");
+const RequestHistory = require("../models/requestHistoryModel");
 const Users = require("../models/userModel");
 const { addStock, subtractStock } = require("../utils/inventoryOperations");
 
@@ -9,9 +8,18 @@ const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" ];
 module.exports.manageStock = async (req, res) => {
     let { bloodGroup, quantity } = req.body;
     const type = req.params.type;
-
-    if (!bloodGroup || !quantity ) {
-        return res.status(422).json({ message: "Every field must be filled" });
+    
+    if (!['in','out'].includes(type)) {
+        return res.status(422).json({
+            message: `Invalid type ${type}`,
+            success: false
+        });
+    }
+    if (!bloodGroup || !quantity) {
+        return res.status(422).json({
+            message: "Every field must be filled",
+            success: false
+        });
     }
     if (!bloodGroups.includes(bloodGroup)) {
         return res.status(422).json({
@@ -98,36 +106,36 @@ module.exports.miscStats = async (req,res) => {
         
         const donors = await Users.find({ userType: 'donor' }).countDocuments();
         const patients = await Users.find({ userType: 'patient' }).countDocuments();
-        const donorAccepted = await DonorRequestHistory.aggregate([
+        const donorAccepted = await RequestHistory.aggregate([
             {
-                $match: { $and: [{ status: "accepted" }, { type: "request" }] }
+                $match: { $and: [{ status: "accepted" }, { type: "request" }, {userType: 'donor'}] }
             },
             {
                 $group: group
             }
         ]);
 
-        const patientAccepted = await PatientRequestHistory.aggregate([
+        const patientAccepted = await RequestHistory.aggregate([
             {
-              $match: { status: 'accepted' }
+              $match: { $and: [{ status: "accepted" }, { type: "request" }, {userType: 'patient'}] }
             },
             {
               $group: group
             }
         ]);
 
-        const donorRejected = await DonorRequestHistory.aggregate([
+        const donorRejected = await RequestHistory.aggregate([
             {
-                $match: { $and: [{ status: "rejected" }, { type: "request" }] }
+                $match: { $and: [{ status: "rejected" }, { type: "request" }, {userType: 'donor'}] }
             },
             {
                 $group: group
             }
         ]);
 
-        const patientRejected = await PatientRequestHistory.aggregate([
+        const patientRejected = await RequestHistory.aggregate([
             {
-                $match: { status: "rejected" }
+                $match: { $and: [{ status: "rejected" }, { type: "request" }, {userType: 'patient'}] }
             },
             {
                 $group: group
@@ -141,11 +149,6 @@ module.exports.miscStats = async (req,res) => {
         miscStats.accepted = (donorAccepted[0]?.totalQuantity ?? 0) + (patientAccepted[0]?.totalQuantity ?? 0);
         miscStats.rejected = (donorRejected[0]?.totalQuantity ?? 0) + (patientRejected[0]?.totalQuantity ?? 0);
         miscStats.totalBlood = bloodStock[0]?.totalQuantity ?? 0;
-
-        // miscStats.donorAccepted = donorAccepted[0]?.totalQuantity ?? 0;
-        // miscStats.patientAccepted = patientAccepted[0]?.totalQuantity ?? 0;
-        // miscStats.donorRejected = donorRejected[0]?.totalQuantity ?? 0;
-        // miscStats.patientRejected = patientRejected[0]?.totalQuantity ?? 0;
 
         res.status(200).json({
             success: true,

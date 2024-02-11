@@ -31,18 +31,23 @@ const userSchema = mongoose.Schema({
     userType: {
         type: String,
         require: true,
-        enum: ['admin', 'donor', 'patinet']
+        enum: ['admin', 'donor', 'patient']
+    },
+    bloodGroup: {
+        type: String,
+        required: true,
+        enum: ["O+", "O-", "AB+", "AB-", "A+", "A-", "B+", "B-"],
     },
     status: {
         type: String,
-        enum: ['verfied', 'rejected']
+        enum: ['verified', 'rejected', 'pending']
     },
     tokens: [{
         token: {
             type: String
         }
     }]
-}, { timeStamps: true });
+}, { timestamps: true });
 
 /* This is a default method 'pre' which runs everytime before saving 
  * into the database. If password is changed hash the password.
@@ -65,7 +70,7 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.generateJsonWebToken = async function () {
     try {
         // generating a json token
-        const token = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
+        const token = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY, { expiresIn: '3h' });
 
         // concating token with existing tokens
         this.tokens = this.tokens.concat({ token });

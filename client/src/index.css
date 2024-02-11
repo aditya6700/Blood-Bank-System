@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,10 +13,200 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
-  padding: 0;
+}
+
+body::-webkit-scrollbar {
+  width: 0.2rem;
+  /* display: none; */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #58000039;
+  width: 0.1rem;
+  border-radius: 1rem;
+}
+
+.my-navbar{
+  height: 60px;
 }
 
 /* Setting up full height for row excluding Navbar */
 .full-height-row {
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - 110px);
+}
+
+
+.dev-card{
+  height: 350px !important;
+  border-radius: 1rem !important;
+}
+
+.dev-header{
+  background-image: url(https://developer.salesforce.com/resources2/career2017/images/header-bg-2.svg?v=2);
+  background-position: right -2px top -15px;
+  height: 150px;
+  border-radius: 1rem 1rem 0 0 !important;
+}
+
+.dev-header img {
+  height: 150px;
+  width: 150px;
+  position: relative;
+  top: 15px;
+}
+
+.landing-page{
+  width: 100%;
+  height: 100vh;
+  background: url('landingPage.png') fixed center;
+  background-size: cover;
+}
+
+/* .my-container{
+  border: 1px solid blue;
+}
+
+.my-row {
+  border: 1px solid black;
+}
+
+.my-col {
+  border: 1px solid green;
+} */
+
+.landing-wrapper .landing-title {
+  font-size: 74px;
+  text-transform: uppercase;
+  font-family: 'Archivo Black', sans-serif;
+  color: red;
+}
+
+.landing-wrapper .landing-qoute {
+  text-transform: capitalize;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.landing-wrapper .landing-slogan::after{
+  content: '';
+  animation: cities  12s infinite linear;
+  font-size: 26px;
+  text-transform: uppercase;
+  font-family: 'Archivo Black', sans-serif;
+  color: rgba(255, 0, 0, 0.829);
+}
+
+@keyframes cities {
+  0%{ content: 'Be the difference, donate blood';}
+  10%{ content: 'Be a donor, be a lifeline.';}
+  20%{ content: 'Give the gift of life – donate blood.';}
+  30%{ content: 'Every drop counts: donate blood today.';}
+  40%{ content: 'Be a blood donor, be a blessing.';}
+  50%{ content: 'Share life: donate blood.';}
+  60%{ content: 'Be a part of the cure – donate blood.';}
+  70%{ content: 'Your blood, their hope: donate now.';}
+  80%{ content: 'Be bold, be brave, donate blood.';}
+  90%{ content: 'Be a lifesaver, be a blood donor.';}
+  100%{ content: 'Donate blood, save lives: be a hero.';}
+}
+
+/* Sidebar */
+.sidebar {
+  background: rgb(0, 7, 61);
+  color: white;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.top_section {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  padding: 15px 10px;
+}
+
+.logo {
+  font-size: 18px;
+  line-height: 0;
+  margin-bottom: 0;
+  justify-self: flex-start;
+}
+
+.bars {
+  font-size: 20px;
+}
+
+.routes {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  font-size: 20px;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  gap: 10px;
+  padding: 6px 12px;
+  border-right: 4px solid transparent;
+  transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.link:hover {
+  border-right: 4px solid white;
+  background: rgb(45, 51, 89);
+  transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.routes .active {
+  border-right: 4px solid white;
+  background: rgb(45, 51, 89);
+}
+
+.link_text {
+  white-space: nowrap;
+  font-size: 18px;
+}
+
+/* Media query for small screens */
+@media (max-width: 490px) {
+  .sidebar {
+    position: absolute;
+    z-index: 10;
+  }
+}
+
+.user_section {
+  margin-top: auto;
+  margin-bottom: 100px;
+  font-size: 20px;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  gap: 10px;
+  padding: 6px 12px;
+  border-right: 4px solid transparent;
+  transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+
+.patient-dash .img-container {
+  position: relative;
+}
+
+.patient-dash .img-container .text-on-image {
+  position: absolute;
+  left: 65%;
+  bottom: 27%;
+  color: #fff;
+  font-weight: bold;
+  width: 150px;
+}
+
+.patient-dash .img-container .unit-count {
+  font-size: 4rem;
+  color: #000;
 }

@@ -20,6 +20,7 @@ import { useAuthContext } from './hooks/useAuthContext';
 import LoadingSpinner from './components/LoadingSpinner';
 import { Profile } from './components/Profile';
 import { ForgotPassword } from './pages/ForgotPassword';
+import { LiveChat } from './chat/LiveChat';
 
 export default function App() {
 
@@ -51,6 +52,7 @@ export default function App() {
             <Route path='/forgot-password'  element={!user ? <ForgotPassword /> : <Navigate to="/dashboard" />} />
             <Route path='*'          element={<Error />} />
           </Routes>
+          <LiveChat />
         </SidebarContainer>
       </BrowserRouter>
       <ToastContainer />

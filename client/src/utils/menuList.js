@@ -1,5 +1,6 @@
 import { FaHome, FaUsers, FaUserInjured, FaWarehouse, FaUser, FaPowerOff } from "react-icons/fa";
 import { BiSolidDonateBlood, BiSolidDonateHeart, BiHistory } from "react-icons/bi";
+import { MdChat } from "react-icons/md";
 import { FaGear } from "react-icons/fa6";
 
 export const menuList = [
@@ -74,6 +75,12 @@ export const menuList = [
         path: "/request-history",
         icon: <BiHistory />,
         userType: "patient"
+    },
+    {
+        name: "Live Chat",
+        path: "/admin-chat",
+        icon: <MdChat />,
+        userType: "admin"
     },
     {
         path: "/settings",

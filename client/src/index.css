@@ -233,16 +233,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-.border-test {
-  border: 2px solid red;
-}
-.border-test1 {
-  border: 2px solid green;
-}
-.border-test2 {
-  border: 2px solid blue;
-}
-
 .slide-container{
   /* max-width: 1120px; */
   width: 100%;
@@ -496,4 +486,31 @@ body::-webkit-scrollbar-thumb {
   background-position: right;
   transition-duration: 1s;
   scale: 1.1;
+}
+
+
+/* admin chat */
+.admin-chat-wrapper {
+  /* border: 2px solid blue; */
+}
+
+.admin-chat-user-list-wrapper {
+  border: 2px solid blue;
+  background-color: #FBFBFB;
+}
+
+.admin-chat-message-container-wrapper {
+  border: 2px solid blue;
+  background-color: #FBFBFB;
+}
+
+
+.border-test {
+  border: 2px solid red;
+}
+.border-test1 {
+  border: 2px solid green;
+}
+.border-test2 {
+  border: 2px solid blue;
 }

@@ -21,6 +21,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 import { Profile } from './components/Profile';
 import { ForgotPassword } from './pages/ForgotPassword';
 import { LiveChat } from './chat/LiveChat';
+import { AdminChat } from './pages/AdminChat';
 
 export default function App() {
 
@@ -44,6 +45,7 @@ export default function App() {
             <Route path='/donations' element={user ? <Donations /> : <Navigate to="/" />} />
             <Route path='/requests'  element={user ? <Requests /> : <Navigate to="/" />} />
             <Route path='/Inventory' element={user ? <Inventory /> : <Navigate to="/" />} />
+            <Route path='/admin-chat' element={user ? <AdminChat /> : <Navigate to="/" />} />
             <Route path='/blood-donate'     element={user ? <DonateBlood /> : <Navigate to="/" />} />
             <Route path='/donation-history' element={user ? <DonationHistory /> : <Navigate to="/" />} />
             <Route path='/blood-request'    element={user ? <RequestBlood /> : <Navigate to="/" />} />

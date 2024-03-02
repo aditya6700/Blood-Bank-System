@@ -6,6 +6,7 @@ const userRouter = require('./src/routes/userRoutes');
 const inventoryRouter = require('./src/routes/inventoryRoutes');
 const historyRouter = require('./src/routes/historyRoutes');
 const adminRouter = require('./src/routes/adminRoutes');
+const chatRouter = require('./src/routes/chatRoutes');
 
 // env and database connection configurations
 dotenv.config({ path: './config.env' });
@@ -39,6 +40,7 @@ app.use('/api/user', userRouter);
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/history', historyRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/chat', chatRouter);
 
 // undefined route for get and post
 app.get('*', (req, res) => {

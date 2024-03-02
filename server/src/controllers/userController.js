@@ -252,3 +252,30 @@ module.exports.resetPassword = async (req, res) => {
     }
 }
 
+module.exports.findUser = async (req,res) => {
+    const id = req.query.id || '';
+    try {
+        
+        let result = {};
+
+        if (id) {
+            result = await Users.findOne({ _id: id });
+        }
+        else {
+            result = await Users.find();
+        }
+        res.status(201).json({
+            success: true,
+            message: 'fetched user details',
+            users: result
+        })
+
+    } catch (error) {
+        res.status(422).json({
+            success: false,
+            message: 'Failed to query users',
+            error: error.message
+        });
+    }
+}
+

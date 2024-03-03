@@ -1,7 +1,12 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
+import { useChatContext } from '../hooks/useChatContext'
 
 export const AdminChat = () => {
+
+  const { userChats, isUserChatsLoading, userChatsError } = useChatContext();
+  console.log(userChats, isUserChatsLoading, userChatsError);
+
   return (
     <>
       <Container className='p-5 d-flex flex-column ' style={{ height: '100vh', overflowY: 'hidden' }} >

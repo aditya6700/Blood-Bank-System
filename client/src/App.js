@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Error } from './pages/Error';
 import { ToastContainer } from 'react-toastify';
 import { About } from './pages/About';
@@ -22,6 +22,7 @@ import { Profile } from './components/Profile';
 import { ForgotPassword } from './pages/ForgotPassword';
 import { LiveChat } from './chat/LiveChat';
 import { AdminChat } from './pages/AdminChat';
+import { ChatContextProvider } from './context/ChatContext';
 
 export default function App() {
 
@@ -33,7 +34,7 @@ export default function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <ChatContextProvider user={user}>
         <SidebarContainer>
           <Routes>
             <Route path='/'          element={!user ? <Landing /> : <Navigate to="/dashboard" />} />
@@ -56,8 +57,8 @@ export default function App() {
           </Routes>
           <LiveChat />
         </SidebarContainer>
-      </BrowserRouter>
-      <ToastContainer />
+        <ToastContainer />
+      </ChatContextProvider>
     </>
   );
 };

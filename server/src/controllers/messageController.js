@@ -27,7 +27,7 @@ module.exports.getMessages = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "messages fetched",
-            message: messages
+            messages: messages
         });
     } catch (error) {
          console.log(error);

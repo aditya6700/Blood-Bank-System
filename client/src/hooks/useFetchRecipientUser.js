@@ -19,7 +19,7 @@ export const useFetchRecipientUser = (chat, user) => {
                   "Content-Type": "application/json"
                 }
               });
-            // console.log(data.users);
+            console.log(data.users);
             setRecipientUser(data.users);
         }
         catch (error) {
@@ -27,7 +27,7 @@ export const useFetchRecipientUser = (chat, user) => {
             setError(error.response.data.message);
         }
     // eslint-disable-next-line
-    },[])
+    },[recipientId])
 
     useEffect(() => {
         getUser();

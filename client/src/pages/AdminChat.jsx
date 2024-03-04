@@ -3,11 +3,12 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { useChatContext } from '../hooks/useChatContext'
 import { UsersChatList } from '../chat/UsersChatList';
 import { PotentialChats } from '../chat/PotentialChats';
+import { ChatBox } from '../chat/ChatBox';
 
 export const AdminChat = () => {
 
   const { userChats, isUserChatsLoading, userChatsError } = useChatContext();
-  console.log(userChats, isUserChatsLoading, userChatsError);
+  // console.log(userChats, isUserChatsLoading, userChatsError);
 
   return (
     <>
@@ -23,9 +24,7 @@ export const AdminChat = () => {
             <UsersChatList />
           </Col>
           <Col md={6} className='admin-chat-message-container-wrapper'>
-            <div className="admin-chat-message-container">
-
-            </div>
+            <ChatBox />
           </Col>
         </Row>
       </Container>  

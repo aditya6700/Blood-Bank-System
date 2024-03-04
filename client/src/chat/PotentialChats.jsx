@@ -6,7 +6,7 @@ import { Stack } from 'react-bootstrap';
 export const PotentialChats = () => {
   const { potentialChats, createChat } = useChatContext();
   const { user } = useAuthContext();
-  console.log(potentialChats);
+  
   return (
     <>
       <Stack className="all-users pt-1 live-chat-overflow" gap={2}>

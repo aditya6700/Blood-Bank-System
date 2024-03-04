@@ -6,7 +6,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 export const UsersChatList = () => {
   const { user } = useAuthContext();
-  const { userChats, isUserChatsLoading, userChatsError } = useChatContext();
+  const { userChats, isUserChatsLoading, updateCurrentChat } = useChatContext();
   // console.log("in userchats list");
   // console.log(userChats, isUserChatsLoading, userChatsError);
   // console.log("end userchats list");
@@ -19,7 +19,7 @@ export const UsersChatList = () => {
           {
             userChats?.map((chat, index) => {
               return (
-                <div key={index}>
+                <div key={index} onClick={() => updateCurrentChat(chat)}>
                   <UserChat chat={chat} user={user} />
                 </div>
               )

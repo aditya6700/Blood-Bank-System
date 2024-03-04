@@ -493,7 +493,10 @@ body::-webkit-scrollbar-thumb {
 .admin-chat-wrapper {
   height: 80vh;
 }
-
+.admin-potential-chats-wrapper {
+  border: 2px solid blue;
+  background-color: #FBFBFB;
+}
 
 .admin-chat-user-list-wrapper {
   border: 2px solid blue;
@@ -513,7 +516,19 @@ body::-webkit-scrollbar-thumb {
 
 }
 
-.admin-chat-user-list {
+.all-users {
+
+}
+
+.single-user {
+  cursor: pointer;
+  padding: 5px 7px;
+  margin-right: 0.5rem;
+  position: relative;
+  border-bottom: 2px solid blue;
+}
+
+.live-chat-overflow {
   height: 80vh;
   overflow-y: auto;
 }
@@ -530,6 +545,11 @@ body::-webkit-scrollbar-thumb {
   position: absolute;
   top: -8px;
   right: -15px;
+}
+
+.single-user .user-online {
+  top: 11px;
+  right: 20px;
 }
 
 .this-user-notifications {

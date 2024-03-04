@@ -21,3 +21,4 @@ export const changePasswordRoute = '/api/user/changePassword';
 export const resetPasswordRoute = '/api/user/resetPassword';
 export const userChatsRoute = '/api/chat';
 export const findUserRoute = '/api/user/find-user';
+export const createChatRoute = '/api/chat';

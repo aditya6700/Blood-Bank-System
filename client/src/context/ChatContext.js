@@ -22,7 +22,7 @@ export const ChatContextProvider = ({children, user}) => {
             "Content-Type": "application/json"
           }
         });
-        console.log(data.chat)
+        // console.log(data.chat)
         setUserChats(data.chat);
       }
       catch (error) {

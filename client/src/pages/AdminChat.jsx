@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useChatContext } from '../hooks/useChatContext'
+import { UsersChatList } from '../chat/UsersChatList';
 
 export const AdminChat = () => {
 
@@ -15,9 +16,9 @@ export const AdminChat = () => {
         </Row>
         <Row className='admin-chat-wrapper h-100'>
           <Col md={3} className='admin-chat-user-list-wrapper'>
-            <div className="admin-chat-user-list">
-              
-            </div>
+            {/* <div className="admin-chat-user-list p-2"> */}
+              <UsersChatList />
+            {/* </div> */}
           </Col>
           <Col md={7} className='admin-chat-message-container-wrapper'>
             <div className="admin-chat-message-container">

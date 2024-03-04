@@ -504,6 +504,40 @@ body::-webkit-scrollbar-thumb {
   background-color: #FBFBFB;
 }
 
+.chat-user-card{
+  border-bottom: 2px solid blue;
+}
+
+.chat-text-content {
+
+}
+
+.chat-audit-info {
+  position: relative;
+}
+
+.user-online {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: rgb(0, 219, 0);
+  position: absolute;
+  top: -8px;
+  right: -15px;
+}
+
+.this-user-notifications {
+  display: flex;
+  background: #00bd9b;
+  height: 20px;
+  width: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .border-test {
   border: 2px solid red;

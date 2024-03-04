@@ -7,7 +7,7 @@ export const UserChat = ({ chat, user }) => {
   console.log(recipientUser);
   return (
     <>
-      <Stack direction='horizontal' gap={3} className='chat-user-card align-items-center p-2 justify-content-between' role='button'>
+      <Stack direction='horizontal' gap={3} className='chat-user-card align-items-center p-2 mx-2 justify-content-between' role='button'>
         <div className='d-flex'>
           <div className='me-2'>
               S 

@@ -491,8 +491,9 @@ body::-webkit-scrollbar-thumb {
 
 /* admin chat */
 .admin-chat-wrapper {
-  /* border: 2px solid blue; */
+  height: 80vh;
 }
+
 
 .admin-chat-user-list-wrapper {
   border: 2px solid blue;
@@ -510,6 +511,11 @@ body::-webkit-scrollbar-thumb {
 
 .chat-text-content {
 
+}
+
+.admin-chat-user-list {
+  height: 80vh;
+  overflow-y: auto;
 }
 
 .chat-audit-info {

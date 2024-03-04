@@ -14,7 +14,7 @@ export const UsersChatList = () => {
   return (
     <>
       {userChats?.length < 1 ? 'No Chats' : (
-        <Stack className='admin-chat-user-list pt-1 flex-grow-0' direction='horizantal' gap={2}>
+        <Stack className='admin-chat-user-list pe-2 pt-1 flex-grow-0' direction='horizantal' gap={2}>
           {isUserChatsLoading && <p> Loading chats...</p>}
           {
             userChats?.map((chat, index) => {

@@ -1,6 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
-import { createChatRoute, findUserRoute, userChatsRoute, messageRoute, sendMessageRoute } from '../utils/ApiRoutes';
+import { createChatRoute, findUserRoute, userChatsRoute, messageRoute, sendMessageRoute, socketConnection } from '../utils/ApiRoutes';
 import axios from 'axios';
+import { io } from "socket.io-client";
 
 export const ChatContext = createContext();
 
@@ -16,6 +17,16 @@ export const ChatContextProvider = ({children, user}) => {
   const [messageError, setMessageError] = useState(null);
   const [sendTextMessageError, setsendTextMessageError] = useState(null);
   const [newMessage, setNewMessage] = useState(null);
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const newSocket = io();
+    setSocket(newSocket);
+    // console.log("new socket connection", newSocket);
+    return () => {
+      newSocket.disconnect();
+    }
+  }, [user]);
 
   const getUsers = useCallback(async () => {
     try {

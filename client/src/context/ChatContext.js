@@ -37,6 +37,10 @@ export const ChatContextProvider = ({children, user}) => {
     socket.on("getOnlineUsers", (res) => {
       setOnlineUsers(res);
     });
+
+    return () => {
+      socket.off("getOnlineUsers");
+    }
     //eslint-disable-next-line
   }, [socket]);
 
@@ -174,7 +178,8 @@ export const ChatContextProvider = ({children, user}) => {
       isMessagesLoading,
       messageError,
       currentChat,
-      sendTextMessage
+      sendTextMessage,
+      onlineUsers
     }}>
       {children}
     </ChatContext.Provider>

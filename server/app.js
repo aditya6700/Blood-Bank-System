@@ -79,6 +79,12 @@ io.on("connection", (socket) => {
 
         io.emit("getOnlineUsers", onlineUsers);
     });
+
+    socket.on("disconnect", () => {
+        onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
+        console.log("updated online users: ", onlineUsers);
+        io.emit("getOnlineUsers", onlineUsers)
+    })
 });
 
 httpServer.listen(port, () => {

@@ -4,7 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { Stack } from 'react-bootstrap';
 
 export const PotentialChats = () => {
-  const { potentialChats, createChat } = useChatContext();
+  const { potentialChats, createChat, onlineUsers } = useChatContext();
   const { user } = useAuthContext();
   
   return (
@@ -15,7 +15,7 @@ export const PotentialChats = () => {
             return (
               <div className="single-user me-2" key={index} onClick={() => createChat(user._id, u._id)}>
                 {u.name}
-                <span className="user-online"></span>
+                <span className={onlineUsers?.some(user => user?.userId === u._id) ? "user-online": ""}></span>
               </div>
             )
           })

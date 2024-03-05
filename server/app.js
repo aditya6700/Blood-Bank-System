@@ -8,6 +8,8 @@ const historyRouter = require('./src/routes/historyRoutes');
 const adminRouter = require('./src/routes/adminRoutes');
 const chatRouter = require('./src/routes/chatRoutes');
 const messageRouter = require('./src/routes/messageRoute');
+const { Server } = require("socket.io");
+const { createServer } = require("http");
 
 // env and database connection configurations
 dotenv.config({ path: './config.env' });
@@ -52,7 +54,23 @@ app.post('*', (req, res) => {
     res.status(404).send(`undefined post request: ${req.url}`);
 });
 
-// start server on user defined port
-app.listen(port, () => {
-    console.log(`listening on port: ${port}`);
+// // start server on user defined port
+// app.listen(port, () => {
+//     console.log(`listening on port: ${port}`);
+// });
+
+
+// socket connection
+const httpServer = createServer(app);
+
+const io = new Server(httpServer);
+
+io.on("connection", (socket) => {
+    console.log("new connection", socket.id);
 });
+
+httpServer.listen(port, () => {
+    console.log(`listening to httpserver on port: ${port}`);
+});
+
+// io.listen(port);

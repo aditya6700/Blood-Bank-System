@@ -1,5 +1,5 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
-import { createChatRoute, findUserRoute, userChatsRoute, messageRoute, sendMessageRoute, socketConnection } from '../utils/ApiRoutes';
+import { createChatRoute, findUserRoute, userChatsRoute, messageRoute, sendMessageRoute } from '../utils/ApiRoutes';
 import axios from 'axios';
 import { io } from "socket.io-client";
 
@@ -43,6 +43,28 @@ export const ChatContextProvider = ({children, user}) => {
     }
     //eslint-disable-next-line
   }, [socket]);
+
+  useEffect(() => {
+    if (!socket) return;
+    const recipientId = currentChat?.members.find((id) => id !== user._id);
+
+    socket.emit("sendMessage", {...newMessage, recipientId})
+    //eslint-disable-next-line
+  }, [newMessage]);
+
+  useEffect(() => {
+    if (!socket) return;
+    socket.on("getMessage", res => {
+      if (currentChat?._id !== res.chatId) return;
+      setMessages((prev) => [...prev, res]);
+    });
+
+    return () => {
+      socket.off("getMessage")
+    }
+    
+    //eslint-disable-next-line
+  }, [socket, currentChat]);
 
   const getUsers = useCallback(async () => {
     try {

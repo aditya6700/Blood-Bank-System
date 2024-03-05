@@ -18,15 +18,27 @@ export const ChatContextProvider = ({children, user}) => {
   const [sendTextMessageError, setsendTextMessageError] = useState(null);
   const [newMessage, setNewMessage] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+
+  console.log("onlineusers: ", onlineUsers);
 
   useEffect(() => {
     const newSocket = io();
     setSocket(newSocket);
-    // console.log("new socket connection", newSocket);
+    console.log("new socket connection", newSocket);
     return () => {
       newSocket.disconnect();
     }
   }, [user]);
+
+  useEffect(() => {
+    if (!socket) return;
+    socket.emit("addNewUser", user && user._id);
+    socket.on("getOnlineUsers", (res) => {
+      setOnlineUsers(res);
+    });
+    //eslint-disable-next-line
+  }, [socket]);
 
   const getUsers = useCallback(async () => {
     try {

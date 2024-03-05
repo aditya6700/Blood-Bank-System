@@ -62,11 +62,23 @@ app.post('*', (req, res) => {
 
 // socket connection
 const httpServer = createServer(app);
-
 const io = new Server(httpServer);
+
+let onlineUsers = [];
 
 io.on("connection", (socket) => {
     console.log("new connection", socket.id);
+    // listen to connection
+    socket.on("addNewUser", (userId) => {
+        !onlineUsers.some((user) => user.userId === userId) &&
+            onlineUsers.push({
+                userId,
+                socketId: socket.id
+            });
+        console.log("onlineUsers: ", onlineUsers);
+
+        io.emit("getOnlineUsers", onlineUsers);
+    });
 });
 
 httpServer.listen(port, () => {

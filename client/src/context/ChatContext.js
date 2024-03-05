@@ -1,5 +1,5 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
-import { createChatRoute, findUserRoute, userChatsRoute, messageRoute } from '../utils/ApiRoutes';
+import { createChatRoute, findUserRoute, userChatsRoute, messageRoute, sendMessageRoute } from '../utils/ApiRoutes';
 import axios from 'axios';
 
 export const ChatContext = createContext();
@@ -14,6 +14,8 @@ export const ChatContextProvider = ({children, user}) => {
   const [messages, setMessages] = useState(null);
   const [isMessagesLoading, setIsMessagesLoading] = useState(false);
   const [messageError, setMessageError] = useState(null);
+  const [sendTextMessageError, setsendTextMessageError] = useState(null);
+  const [newMessage, setNewMessage] = useState(null);
 
   const getUsers = useCallback(async () => {
     try {
@@ -121,6 +123,22 @@ export const ChatContextProvider = ({children, user}) => {
     setCurrentChat(chat)
   }, []);
 
+  const sendTextMessage = useCallback(async (text, senderId, chatId, setTextMessage) => {
+    if (!text) return console.log("type something to send...");
+    try {
+      const { data } = await axios.post(sendMessageRoute,
+        { chatId, senderId, text },
+        { withCredentials: true });
+      setNewMessage(data.messages);
+      setTextMessage("");
+      setMessages((prev) => [...prev, data.messages]);
+    }
+    catch (error) {
+      console.log(error);
+      return setsendTextMessageError(error.response.data.message);
+    }
+  },[])
+
   return (
     <ChatContext.Provider value={{
       userChats,
@@ -132,7 +150,8 @@ export const ChatContextProvider = ({children, user}) => {
       messages,
       isMessagesLoading,
       messageError,
-      currentChat
+      currentChat,
+      sendTextMessage
     }}>
       {children}
     </ChatContext.Provider>

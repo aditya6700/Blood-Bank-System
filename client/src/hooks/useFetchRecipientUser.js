@@ -19,7 +19,7 @@ export const useFetchRecipientUser = (chat, user) => {
                   "Content-Type": "application/json"
                 }
               });
-            console.log(data.users);
+            // console.log(data.users);
             setRecipientUser(data.users);
         }
         catch (error) {

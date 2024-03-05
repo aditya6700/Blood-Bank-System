@@ -23,3 +23,4 @@ export const userChatsRoute = '/api/chat';
 export const findUserRoute = '/api/user/find-user';
 export const createChatRoute = '/api/chat';
 export const messageRoute = '/api/message';
+export const sendMessageRoute = '/api/message';

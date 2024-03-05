@@ -564,6 +564,16 @@ body::-webkit-scrollbar-thumb {
   justify-content: center;
 }
 
+.live-chat-send-btn{
+  border: none;
+  background: rgba(72, 112, 223, 1);
+  color: white;
+  height: 40px;
+  width: 55px;
+  border-radius: 30%;
+  font-size: larger;
+}
+
 
 .border-test {
   border: 2px solid red;

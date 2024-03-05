@@ -8,7 +8,7 @@ module.exports.createMessage = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "message created",
-            message: message
+            messages: message
         });
     } catch (error) {
         console.log(error);

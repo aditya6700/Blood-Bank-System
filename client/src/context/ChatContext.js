@@ -123,7 +123,8 @@ export const ChatContextProvider = ({children, user}) => {
       }
       
     }
-  }, [user]);
+    //eslint-disable-next-line
+  }, [user, notifications]);
 
   useEffect(() => {
     getUserChats();

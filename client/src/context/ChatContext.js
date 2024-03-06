@@ -19,8 +19,8 @@ export const ChatContextProvider = ({children, user}) => {
   const [newMessage, setNewMessage] = useState(null);
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [notifications, setNotifications] = useState(0);
 
-  console.log("onlineusers: ", onlineUsers);
 
   useEffect(() => {
     const newSocket = io();
@@ -54,13 +54,15 @@ export const ChatContextProvider = ({children, user}) => {
 
   useEffect(() => {
     if (!socket) return;
+
     socket.on("getMessage", res => {
+      setNotifications(notifications + 1);
       if (currentChat?._id !== res.chatId) return;
       setMessages((prev) => [...prev, res]);
     });
 
     return () => {
-      socket.off("getMessage")
+      socket.off("getMessage");
     }
     
     //eslint-disable-next-line
@@ -201,7 +203,8 @@ export const ChatContextProvider = ({children, user}) => {
       messageError,
       currentChat,
       sendTextMessage,
-      onlineUsers
+      onlineUsers,
+      notifications
     }}>
       {children}
     </ChatContext.Provider>

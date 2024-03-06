@@ -81,7 +81,7 @@ body::-webkit-scrollbar-thumb {
 /* Sidebar */
 .sidebar {
   background: rgb(0, 7, 61);
-  color: white;
+  color: #fff;
   height: 100vh;
 }
 
@@ -120,7 +120,7 @@ body::-webkit-scrollbar-thumb {
   text-decoration: none;
   display: flex;
   align-items: baseline;
-  color: white;
+  color: #fff;
   gap: 10px;
   padding: 6px 12px;
   border-right: 4px solid transparent;
@@ -128,13 +128,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 .link:hover {
-  border-right: 4px solid white;
+  border-right: 4px solid #fff;
   background: rgb(45, 51, 89);
   transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 
 .routes .active {
-  border-right: 4px solid white;
+  border-right: 4px solid #fff;
   background: rgb(45, 51, 89);
 }
 
@@ -145,7 +145,7 @@ body::-webkit-scrollbar-thumb {
 
 .menu {
   display: flex;
-  color: white;
+  color: #fff;
   padding: 6px 24px 6px 12px;
   border-right: 4px solid transparent;
   transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
@@ -490,51 +490,24 @@ body::-webkit-scrollbar-thumb {
 
 
 /* admin chat */
-.admin-chat-wrapper {
-  height: 80vh;
-}
-.admin-potential-chats-wrapper {
-  border: 2px solid blue;
-  background-color: #FBFBFB;
-}
-
-.admin-chat-user-list-wrapper {
-  border: 2px solid blue;
-  background-color: #FBFBFB;
-}
-
-.admin-chat-message-container-wrapper {
-  border: 2px solid blue;
-  background-color: #FBFBFB;
-}
-
-.chat-user-card{
-  border-bottom: 2px solid blue;
-}
-
-.chat-text-content {
-
-}
-
-.all-users {
-
-}
-
-.single-user {
-  cursor: pointer;
-  padding: 5px 7px;
-  margin-right: 0.5rem;
-  position: relative;
-  border-bottom: 2px solid blue;
-}
-
 .live-chat-overflow {
-  height: 80vh;
+  height: 70vh;
   overflow-y: auto;
 }
 
-.chat-audit-info {
-  position: relative;
+.chat-user-initials {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #0d6efd;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-user-card{
+  border-bottom: 2px solid #0d6efd;
 }
 
 .user-online {
@@ -542,38 +515,44 @@ body::-webkit-scrollbar-thumb {
   width: 12px;
   border-radius: 50%;
   background: rgb(0, 219, 0);
-  position: absolute;
-  top: -8px;
-  right: -15px;
 }
 
-.single-user .user-online {
-  top: 11px;
-  right: 20px;
+.chat-message {
+  background: #0d6efd;
+  padding: 12px;
+  color: #fff;
+  border-radius: 12px;
+  font-size: 16px;
 }
 
-.this-user-notifications {
-  display: flex;
-  background: #00bd9b;
-  height: 20px;
-  width: 20px;
+.self-chat {
+  background: #f5f1f0;
+  color: #000;
+}
+
+.chat-msg-date{
   font-size: 12px;
-  font-weight: 700;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
+}
+
+.single-user {
+  cursor: pointer;
+  padding: 5px 7px;
+  margin-right: 0.5rem;
+  border-bottom: 2px solid #0d6efd;
 }
 
 .live-chat-send-btn{
   border: none;
-  background: rgba(72, 112, 223, 1);
-  color: white;
+  background: #0d6efd;
+  color: #fff;
   height: 40px;
   width: 55px;
   border-radius: 30%;
-  font-size: larger;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 
 .border-test {
   border: 2px solid red;

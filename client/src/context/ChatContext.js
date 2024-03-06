@@ -46,7 +46,7 @@ export const ChatContextProvider = ({children, user}) => {
 
   useEffect(() => {
     if (!socket) return;
-    const recipientId = currentChat?.members.find((id) => id !== user._id);
+    const recipientId = currentChat?.members.find((id) => id !== user?._id);
 
     socket.emit("sendMessage", {...newMessage, recipientId})
     //eslint-disable-next-line
@@ -141,7 +141,7 @@ export const ChatContextProvider = ({children, user}) => {
           "Content-Type": "application/json"
         }
       });
-      console.log(data.messages)
+      // console.log(data.messages)
       setMessages(data.messages);
     }
     catch (error) {

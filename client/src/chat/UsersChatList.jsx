@@ -7,14 +7,12 @@ import { useAuthContext } from '../hooks/useAuthContext';
 export const UsersChatList = () => {
   const { user } = useAuthContext();
   const { userChats, isUserChatsLoading, updateCurrentChat } = useChatContext();
-  // console.log("in userchats list");
-  // console.log(userChats, isUserChatsLoading, userChatsError);
-  // console.log("end userchats list");
 
   return (
     <>
+      <div className="bg-primary text-light text-capitalize fw-bold p-2 ps-3 fs-5 shadow"> My Chats </div>
       {userChats?.length < 1 ? 'No Chats' : (
-        <Stack className='admin-chat-user-list live-chat-overflow pe-2 pt-1 flex-grow-0' direction='horizantal' gap={2}>
+        <Stack className='admin-chat-user-list live-chat-overflow pt-1 flex-grow-0' direction='horizantal' gap={2}>
           {isUserChatsLoading && <p> Loading chats...</p>}
           {
             userChats?.map((chat, index) => {

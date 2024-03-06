@@ -22,24 +22,33 @@ export const UserChat = ({ chat, user }) => {
     return shortText;
   }
 
+  const getInitials = (name) => {
+    return name?.split(' ')
+    .map(word => word.charAt(0))
+    .join('')
+    .toUpperCase();
+  }
+  
+
   return (
     <>
-      <Stack direction='horizontal' gap={3} className='chat-user-card align-items-center p-2 mx-2 justify-content-between' role='button'>
-        <div className='d-flex'>
-          <div className='me-2'>
-              S 
+      <Stack gap={1} className='chat-user-card p-2 mx-2' role='button'>
+        <div className='d-flex align-items-center gap-2'>
+          <div className='chat-user-initials'> {getInitials(recipientUser?.name)} </div>
+          <div className="chat-text-content" >
+            <div className="chat-name"> {recipientUser?.name} </div>
           </div>
-          <div className="chat-text-content">
-            <div className="name"> {recipientUser?.name} </div>
-            <div className="text"> {latestMessage?.text && (
-              <span>{truncateLastMessage(latestMessage?.text)}</span>
-            )}</div>
-          </div>
+            <span className={isOnline ? "user-online ms-auto" : ""}></span>
         </div>
-        <div className="chat-audit-info d-flex flex-column align-items-end">
-          <div className="date">{moment(latestMessage?.createdAt).calendar()}</div>
-          <div className="this-user-notifications">2</div>
-          <span className={isOnline ? "user-online" : ""}></span>
+        <div className="chat-audit-info d-flex justify-content-between">
+          <div className="text fst-italic ps-2">
+            {
+              latestMessage?.text && (
+                <span>{truncateLastMessage(latestMessage?.text)}</span>
+              )
+            }
+          </div>
+          <div className="chat-msg-date">{moment(latestMessage?.createdAt).calendar()}</div>
         </div>
       </Stack>
     </>

@@ -16,14 +16,12 @@ export const useFetchLatestMessage = (chat) => {
                         "Content-Type": "application/json"
                     }
                 });
-                console.log(data.messages);
                 const lastMessage = data.messages[data.messages?.length - 1];
                 setLatestMessage(lastMessage);
             }
             catch (error) {
                 console.log(error);
             }
-           
         };
         getMessages();
         //eslint-disable-next-line

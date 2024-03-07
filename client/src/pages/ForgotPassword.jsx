@@ -39,7 +39,7 @@ export const ForgotPassword = () => {
   const handleSecurityQuestionSubmit = (e) => {
     e.preventDefault();
    
-    if (securityAnswer.toLowerCase() === userData.city) {
+    if (securityAnswer.toLowerCase() === userData.city.toLowerCase()) {
       setSecurityQuestion(''); 
       setShowSecurityQuestion(false);
       setShowNewPassword(true);

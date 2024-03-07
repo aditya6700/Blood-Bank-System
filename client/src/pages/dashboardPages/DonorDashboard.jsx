@@ -24,7 +24,7 @@ export const DonorDashboard = () => {
       });
 
       setDashboardData({ ...data.userStats, totalCount: data.userStats.donorReqRej + data.userStats.donorReqAcc + data.userStats.donorReqPend });
-      console.log(dashboardData);
+      // console.log(dashboardData);
     }
     catch (error) {
         console.log(error.response)

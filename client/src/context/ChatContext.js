@@ -25,7 +25,7 @@ export const ChatContextProvider = ({children, user}) => {
   useEffect(() => {
     const newSocket = io();
     setSocket(newSocket);
-    console.log("new socket connection", newSocket);
+    // console.log("new socket connection", newSocket);
     return () => {
       newSocket.disconnect();
     }

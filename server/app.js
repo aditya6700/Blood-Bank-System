@@ -67,7 +67,7 @@ const io = new Server(httpServer);
 let onlineUsers = [];
 
 io.on("connection", (socket) => {
-    console.log("new connection", socket.id);
+    // console.log("new connection", socket.id);
     // listen to connection
     socket.on("addNewUser", (userId) => {
         !onlineUsers.some((user) => user.userId === userId) &&
@@ -75,7 +75,7 @@ io.on("connection", (socket) => {
                 userId,
                 socketId: socket.id
             });
-        console.log("onlineUsers: ", onlineUsers);
+        // console.log("onlineUsers: ", onlineUsers);
 
         io.emit("getOnlineUsers", onlineUsers);
     });
@@ -89,7 +89,7 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect", () => {
         onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
-        console.log("updated online users: ", onlineUsers);
+        // console.log("updated online users: ", onlineUsers);
         io.emit("getOnlineUsers", onlineUsers)
     })
 });

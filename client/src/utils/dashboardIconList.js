@@ -12,13 +12,13 @@ export const dashboardList = [
         bgColor: 'secondary'
     },
     {
-        name: "Accpeted",
+        name: "Accepted",
         icon: "fas fa-check-circle",
         textColor: 'text-success',
         bgColor: 'info'
     },
     {
-        name: "Rejcted",
+        name: "Rejected",
         icon: "fas fa-ban",
         textColor: 'text-warning',
         bgColor: 'warning'

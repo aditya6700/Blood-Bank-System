@@ -20,7 +20,7 @@ export const useFetchRecipientUser = (chat, user) => {
                 }
               });
             // console.log(data.users);
-            setRecipientUser(data.users);
+            setRecipientUser(data.user);
         }
         catch (error) {
             console.log(error)
@@ -33,5 +33,5 @@ export const useFetchRecipientUser = (chat, user) => {
         getUser();
     }, [getUser])
     
-    return { recipientUser };
+    return { recipientUser, error };
 }

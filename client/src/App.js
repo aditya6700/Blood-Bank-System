@@ -33,8 +33,8 @@ export default function App() {
 
   return (
     <>
-      <ChatContextProvider user={user}>
-        <SidebarContainer>
+      <SidebarContainer>
+        <ChatContextProvider user={user}>
           <Routes>
             <Route path='/'          element={!user ? <Landing /> : <Navigate to="/dashboard" />} />
             <Route path='/about'     element={<About />} />
@@ -54,9 +54,9 @@ export default function App() {
             <Route path='/forgot-password'  element={!user ? <ForgotPassword /> : <Navigate to="/dashboard" />} />
             <Route path='*'          element={<Error />} />
           </Routes>
-        </SidebarContainer>
-        <ToastContainer />
-      </ChatContextProvider>
+        </ChatContextProvider>
+      </SidebarContainer>
+      <ToastContainer />
     </>
   );
 };

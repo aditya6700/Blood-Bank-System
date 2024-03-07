@@ -267,7 +267,7 @@ module.exports.findUser = async (req,res) => {
         res.status(200).json({
             success: true,
             message: 'fetched user details',
-            users: result
+            user: result
         })
 
     } catch (error) {

@@ -77,9 +77,9 @@ export const ChatContextProvider = ({children, user}) => {
         }
       });
 
-      const pChats = data.users.filter((u) => {
+      const pChats = data.user.filter((u) => {
         let isChatCreated = false;
-        if (user._id === u._id) return false;
+        if (user?._id === u._id) return false;
         if (userChats) {
           isChatCreated = userChats?.some((chat) => chat.members[0] === u._id || chat.members[1] === u._id);
         }
@@ -204,8 +204,9 @@ export const ChatContextProvider = ({children, user}) => {
       messageError,
       currentChat,
       sendTextMessage,
+      sendTextMessageError,
       onlineUsers,
-      notifications
+      notifications,
     }}>
       {children}
     </ChatContext.Provider>

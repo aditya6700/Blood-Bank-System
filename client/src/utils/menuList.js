@@ -80,7 +80,7 @@ export const menuList = [
         name: "Live Chat",
         path: "/admin-chat",
         icon: <MdChat />,
-        userType: "admin"
+        userType: "common"
     },
     {
         path: "/settings",

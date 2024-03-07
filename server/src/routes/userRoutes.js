@@ -12,6 +12,6 @@ userRouter.get('/logout/:id', logout);
 userRouter.post('/updateProfile', authenticate, updateuser);
 userRouter.post('/changePassword', authenticate, changePassword);
 userRouter.post('/resetPassword/:action', resetPassword);
-userRouter.get('/find-user', adminAuth, findUser);
+userRouter.get('/find-user', authenticate, findUser);
 
 module.exports = userRouter;

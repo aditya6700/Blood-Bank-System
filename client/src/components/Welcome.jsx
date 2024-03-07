@@ -9,7 +9,7 @@ export default function Welcome({username}) {
       <h2>
         Welcome, <span>{username}!</span>
       </h2>
-      <h4>Please select a chat to Start messaging.</h4>
+      <h4>Please select a chat to start messaging.</h4>
     </Container>
   )
 }

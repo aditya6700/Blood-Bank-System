@@ -15,7 +15,7 @@ module.exports.statusUpdate = async (req,res) => {
         })
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to update user status',
             error: error.message
@@ -41,7 +41,7 @@ module.exports.getDonors = async (req,res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             message: 'Failed to fetch donors list',
             success: false,
             error: error.message
@@ -67,7 +67,7 @@ module.exports.getPatients = async (req,res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             message: 'Failed to fetch patients list',
             success: false,
             error: error.message
@@ -99,7 +99,7 @@ module.exports.getDonationsList = async (req,res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             message: 'Failed to fetch donations list',
             success: false,
             error: error.message
@@ -135,7 +135,7 @@ module.exports.getRequestsList = async (req, res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             message: 'Failed to fetch requests list',
             success: false,
             error: error.message

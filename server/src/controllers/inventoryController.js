@@ -10,19 +10,19 @@ module.exports.manageStock = async (req, res) => {
     const type = req.params.type;
     
     if (!['in','out'].includes(type)) {
-        return res.status(422).json({
+        return res.status(400).json({
             message: `Invalid type ${type}`,
             success: false
         });
     }
     if (!bloodGroup || !quantity) {
-        return res.status(422).json({
+        return res.status(400).json({
             message: "Every field must be filled",
             success: false
         });
     }
     if (!bloodGroups.includes(bloodGroup)) {
-        return res.status(422).json({
+        return res.status(400).json({
             message: `Blood groups allowed are ${bloodGroups}`,
             success: false
         });
@@ -50,7 +50,7 @@ module.exports.manageStock = async (req, res) => {
 
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: error.message,
             error: error
@@ -63,7 +63,7 @@ module.exports.getStock = async (req, res) => {
 
     // Throw error if group is not empty and not valid blood group
     if (group && !bloodGroups.includes(group)) {
-        return res.status(422).json({
+        return res.status(400).json({
             message: `Blood groups allowed are ${bloodGroups}`,
             success: false
         });
@@ -80,14 +80,14 @@ module.exports.getStock = async (req, res) => {
             inventory = await Inventory.find();
         }
         
-        res.status(201).json({
+        res.status(200).json({
             message: 'Fetched stock details from Inventory',
             success: true,
             inventory
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to query stock',
             error: error.message
@@ -157,7 +157,7 @@ module.exports.miscStats = async (req,res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to get misc stats',
             error: error.message

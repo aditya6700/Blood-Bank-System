@@ -5,7 +5,7 @@ module.exports.createMessage = async (req, res) => {
     try {
         const messageObj = new MessageModel({ chatId, senderId, text });
         const message = await messageObj.save();
-        return res.status(200).json({
+        return res.status(201).json({
             success: true,
             message: "message created",
             messages: message

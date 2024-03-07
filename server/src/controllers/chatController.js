@@ -8,7 +8,7 @@ module.exports.createChat = async (req,res) => {
         });
         
         if (existingChat) {
-            return res.status(200).json({
+            return res.status(409).json({
                 success: true,
                 message: "chat already exists",
                 chat: existingChat
@@ -18,7 +18,7 @@ module.exports.createChat = async (req,res) => {
         const newChatObj = new ChatModel({ members: [firstId, secondId] });
         const newChat = await newChatObj.save();
 
-        res.status(200).json({
+        res.status(201).json({
             success: true,
             message: "new chat created",
             chat: newChat

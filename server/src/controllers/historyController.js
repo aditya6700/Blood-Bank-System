@@ -11,13 +11,13 @@ module.exports.donorRequest = async (req, res) => {
 
     // some validations
     if (!typeList.includes(type)) {
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: `Invalid request = ${type}`
         });
     }
     else if (!bloodGroups.includes(bloodGroup)) {
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: `Invalid blood group ${bloodGroup}`
         });
@@ -45,7 +45,7 @@ module.exports.donorRequest = async (req, res) => {
         else if (type === 'request') {
             message = 'Failed to make a blood request'
         }
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message,
             error: error.message
@@ -60,7 +60,7 @@ module.exports.patientRequest = async (req, res) => {
 
     // some validations
     if (!bloodGroups.includes(bloodGroup)) {
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: `Invalid blood group ${bloodGroup}`
         });
@@ -81,7 +81,7 @@ module.exports.patientRequest = async (req, res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to make a blood request',
             error: error.message
@@ -115,7 +115,7 @@ module.exports.getRequestsHistory = async (req, res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             message: 'Failed to fetch requests list',
             success: false,
             error: error.message
@@ -149,7 +149,7 @@ module.exports.getDonationsHistory = async (req,res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             message: 'Failed to fetch donations list',
             success: false,
             error: error.message
@@ -162,7 +162,7 @@ module.exports.dashboardStats = async (req, res) => {
     const userList = ['donor', 'patient'];
 
     if (!userList.includes(userType)) {
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: `Invalid user ${userType}`
         });
@@ -236,7 +236,7 @@ module.exports.dashboardStats = async (req, res) => {
         
     } catch (error) {
         console.log(error)
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to get misc stats',
             error: error.message

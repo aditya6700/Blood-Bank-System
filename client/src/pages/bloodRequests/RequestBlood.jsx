@@ -4,6 +4,7 @@ import axios from 'axios';
 import { bloodRequestRoute } from '../../utils/ApiRoutes';
 import { NonVerfiedUser } from '../../components/NonVerfiedUser';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import AppointmentScheduler from '../../components/AppointmentScheduler';
 
 export const RequestBlood = () => {
 
@@ -128,6 +129,10 @@ export const RequestBlood = () => {
                         <Form.Control className='border-2' min={1} max={10} type="number" placeholder="0" name="quantity" value={requestDetails.quantity} onChange={handleChange} required />
                       </Col>
                     </Form.Group>
+                        
+                     
+                    <AppointmentScheduler />
+                    
 
                     <Form.Group as={Row} className="mb-3">
                       <Col sm={{ span: 10, offset: 3 }}>

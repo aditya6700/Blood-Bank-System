@@ -11,6 +11,7 @@ export const Sidebar = () => {
   const { user } = useAuthContext();
   const userType = user?.userType;
   const location = useLocation();
+  const userName = user.name.split(' ')[0];
 
   const [isOpen, setIsOpen] = useState(true);
 
@@ -121,7 +122,7 @@ export const Sidebar = () => {
                     exit="hidden"
                     className="link_text"
                   >
-                  {user.name} <Badge pill style={{fontSize: '12px'}} bg="danger" text="white"> {userType} </Badge>
+                  {userName} <Badge pill style={{fontSize: '12px'}} bg="danger" text="white"> {userType} </Badge>
                   </motion.div>
                 )}
               </AnimatePresence>

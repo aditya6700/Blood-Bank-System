@@ -30,7 +30,7 @@ module.exports.register = async (req, res) => {
             return res.status(409).json({
                 message: 'A user already exists with same email',
                 error: duplicateUser,
-                success: false``
+                success: false
             });
         }
 

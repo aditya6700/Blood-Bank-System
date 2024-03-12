@@ -243,3 +243,32 @@ module.exports.dashboardStats = async (req, res) => {
         });
     }
 }
+
+module.exports.getSlots = async (req, res) => {
+    const type = req.query.type || '';
+    console.log(type);
+    if (type === '' || !['donate', 'request'].includes(type)) {
+        return res.status(404).json({
+            success: false,
+            message: `invalid type for fetching slots: ${type}`
+        });
+    }
+    try {
+        const currentDate = new Date();
+        const threeDaysLater = new Date(currentDate);
+        threeDaysLater.setDate(currentDate.getDate() + 3);
+
+        let bookedSlots = await RequestHistory.find({ type, status: 'pending', appointmentSlot: { $gte: currentDate, $lt: threeDaysLater } }, { appointmentSlot: 1 });
+        return res.status(200).json({
+            success: true,
+            bookedSlots,
+            message: "successfully fetched available slots"
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: `Failed to get slots for ${type}`,
+            error: error.message
+        });
+    }
+}

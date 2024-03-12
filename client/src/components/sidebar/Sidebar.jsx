@@ -11,7 +11,7 @@ export const Sidebar = () => {
   const { user } = useAuthContext();
   const userType = user?.userType;
   const location = useLocation();
-  const userName = user.name.split(' ')[0];
+  const userName = user?.name.split(' ')[0];
 
   const [isOpen, setIsOpen] = useState(true);
 

@@ -164,7 +164,7 @@ export const Profile = () => {
             <Form>
                 <Form.Group as={Row} className="mb-3" controlId="oldPassword">
                   <Form.Label column sm={4}>
-                    Old Password
+                    Existing Password
                   </Form.Label>
                   <Col sm={8}>
                     <Form.Control className='border-2' type="password" onChange={handleSecurityChange} value={securityData.oldPassword} name="oldPassword" />

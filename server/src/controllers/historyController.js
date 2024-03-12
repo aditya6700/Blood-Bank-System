@@ -229,7 +229,7 @@ module.exports.dashboardStats = async (req, res) => {
 
             return res.status(200).json({
                 success: true,
-                userStats: { accepted: patientReqAccept[0].totalQuantity, pending: patientPendingReq, recentTransfusers }
+                userStats: { accepted: patientReqAccept[0]?.totalQuantity || 0, pending: patientPendingReq, recentTransfusers }
             });
         }
         

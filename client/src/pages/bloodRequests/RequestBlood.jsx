@@ -56,7 +56,7 @@ export const RequestBlood = () => {
     setRequestId('');
     setRequestError(undefined);
     setrRquestDetails({
-      bloodGroup: '', quantity: 0, disease: '', appointmentSlot:''
+      bloodGroup: user.bloodGroup, quantity: 0, disease: '', appointmentSlot: ''
     });
   }
 

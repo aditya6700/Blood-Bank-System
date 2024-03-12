@@ -24,8 +24,8 @@ module.exports.donorRequest = async (req, res) => {
     }
 
     try {
-        let appointmentSlotDate = new Date(appointmentSlot + 'Z');
-        const donorHistRec = new RequestHistory({ bloodGroup, quantity, type, disease, status, user: userId, userType, appointmentSlot: appointmentSlotDate });
+
+        const donorHistRec = new RequestHistory({ bloodGroup, quantity, type, disease, status, user: userId, userType, appointmentSlot });
         const donorRequestHistRec = await donorHistRec.save();
         await donorRequestHistRec.populate({
             path: 'user',
@@ -68,8 +68,7 @@ module.exports.patientRequest = async (req, res) => {
 
     try {
 
-        let appointmentSlotDate = new Date(appointmentSlot + 'Z');
-        const patientHistRec = new RequestHistory({ bloodGroup, quantity, disease, type, status, user: userId, userType, appointmentSlot: appointmentSlotDate });
+        const patientHistRec = new RequestHistory({ bloodGroup, quantity, disease, type, status, user: userId, userType, appointmentSlot });
         const patientRequestHistRec = await patientHistRec.save();
         await patientRequestHistRec.populate({
             path: 'user',

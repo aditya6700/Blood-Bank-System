@@ -55,7 +55,7 @@ export const DonateBlood = () => {
     setRequestId('');
     setRequestError(undefined);
     setDonationDetails({
-      bloodGroup: '', quantity: 0, disease: '', appointmentSlot: ''
+      bloodGroup: user.bloodGroup, quantity: 0, disease: '', appointmentSlot: ''
     });
   }
 

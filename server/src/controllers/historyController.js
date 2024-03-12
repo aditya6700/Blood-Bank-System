@@ -4,7 +4,7 @@ const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 const typeList = ["donate", "request"];
 
 module.exports.donorRequest = async (req, res) => {
-    const { bloodGroup, quantity, userId, disease } = req.body;
+    const { bloodGroup, quantity, userId, disease, appointmentSlot } = req.body;
     const type = req.params.type;
 
     const userType = 'donor', status = 'pending';
@@ -25,7 +25,7 @@ module.exports.donorRequest = async (req, res) => {
 
     try {
 
-        const donorHistRec = new RequestHistory({ bloodGroup, quantity, type, disease, status, user: userId, userType });
+        const donorHistRec = new RequestHistory({ bloodGroup, quantity, type, disease, status, user: userId, userType, appointmentSlot });
         const donorRequestHistRec = await donorHistRec.save();
         await donorRequestHistRec.populate({
             path: 'user',
@@ -54,7 +54,7 @@ module.exports.donorRequest = async (req, res) => {
 }
 
 module.exports.patientRequest = async (req, res) => {
-    const { bloodGroup, quantity, userId, disease } = req.body;
+    const { bloodGroup, quantity, userId, disease, appointmentSlot } = req.body;
 
     const type = 'request', userType = 'patient', status = 'pending';
 
@@ -68,7 +68,7 @@ module.exports.patientRequest = async (req, res) => {
 
     try {
 
-        const patientHistRec = new RequestHistory({ bloodGroup, quantity, disease, type, status, user: userId, userType });
+        const patientHistRec = new RequestHistory({ bloodGroup, quantity, disease, type, status, user: userId, userType, appointmentSlot });
         const patientRequestHistRec = await patientHistRec.save();
         await patientRequestHistRec.populate({
             path: 'user',

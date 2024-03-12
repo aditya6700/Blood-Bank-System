@@ -1,22 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Col, Form, Row } from 'react-bootstrap';
 
-const AppointmentScheduler = () => {
-  const [selectedDateTime, setSelectedDateTime] = useState('');
+const AppointmentScheduler = ({handleChange, requestDetails}) => {
   const [bookedSlots, setBookedSlots] = useState([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
-
-  useEffect(() => {
-
-    axios.get('/api/bookedSlots')
-      .then(response => {
-        setBookedSlots(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching booked slots:', error);
-      });
-  }, []);
 
 
   const generateTimeSlots = () => {
@@ -51,10 +38,6 @@ const AppointmentScheduler = () => {
   }, [bookedSlots]);
 
 
-  const handleDateTimeChange = (e) => {
-    setSelectedDateTime(e.target.value);
-  };
-
   return (
     <Form.Group as={Row} className="mb-3" controlId="quantity">
       <Form.Label column sm={3}>
@@ -64,10 +47,9 @@ const AppointmentScheduler = () => {
         <Form.Control
           className='border-2'
           type="datetime-local"
-          id="appointmentDateTime"
-          name="appointmentDateTime"
-          value={selectedDateTime}
-          onChange={handleDateTimeChange}
+          name="appointmentSlot"
+          value={requestDetails.appointmentSlot}
+          onChange={handleChange}
           min={availableTimeSlots.length > 0 ? availableTimeSlots[0] : ''}
           max={availableTimeSlots.length > 0 ? availableTimeSlots[availableTimeSlots.length - 1] : ''}
           list="timeSlots"

@@ -89,7 +89,7 @@ module.exports.getDonationsList = async (req,res) => {
             quantity: donation.quantity,
             status: donation.status,
             disease: donation.disease,
-            updatedAt: donation.updatedAt
+            appointmentSlot: donation.appointmentSlot
         }));
   
         res.status(200).json({
@@ -122,7 +122,7 @@ module.exports.getRequestsList = async (req, res) => {
             quantity: request.quantity,
             status: request.status,
             disease: request.disease,
-            updatedAt: request.updatedAt,
+            appointmentSlot: request.appointmentSlot,
             userType: request.userType
         }));
 

@@ -104,7 +104,7 @@ module.exports.getRequestsHistory = async (req, res) => {
             disease: request.disease,
             bloodGroup: request.bloodGroup,
             quantity: request.quantity,
-            updatedAt: request.updatedAt,
+            appointmentSlot: request.appointmentSlot,
             status: request.status
         }));
   
@@ -139,7 +139,7 @@ module.exports.getDonationsHistory = async (req,res) => {
             quantity: donation.quantity,
             status: donation.status,
             disease: donation.disease,
-            updatedAt: donation.updatedAt
+            appointmentSlot: donation.appointmentSlot
         }));
   
         res.status(200).json({

@@ -24,3 +24,4 @@ export const findUserRoute = '/api/user/find-user';
 export const createChatRoute = '/api/chat';
 export const messageRoute = '/api/message';
 export const sendMessageRoute = '/api/message';
+export const bookedSlotsRoute = '/api/history/slots'

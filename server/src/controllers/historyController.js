@@ -24,8 +24,8 @@ module.exports.donorRequest = async (req, res) => {
     }
 
     try {
-
-        const donorHistRec = new RequestHistory({ bloodGroup, quantity, type, disease, status, user: userId, userType, appointmentSlot });
+        let appointmentSlotDate = new Date(appointmentSlot + 'Z');
+        const donorHistRec = new RequestHistory({ bloodGroup, quantity, type, disease, status, user: userId, userType, appointmentSlot: appointmentSlotDate });
         const donorRequestHistRec = await donorHistRec.save();
         await donorRequestHistRec.populate({
             path: 'user',
@@ -68,7 +68,8 @@ module.exports.patientRequest = async (req, res) => {
 
     try {
 
-        const patientHistRec = new RequestHistory({ bloodGroup, quantity, disease, type, status, user: userId, userType, appointmentSlot });
+        let appointmentSlotDate = new Date(appointmentSlot + 'Z');
+        const patientHistRec = new RequestHistory({ bloodGroup, quantity, disease, type, status, user: userId, userType, appointmentSlot: appointmentSlotDate });
         const patientRequestHistRec = await patientHistRec.save();
         await patientRequestHistRec.populate({
             path: 'user',
@@ -246,7 +247,7 @@ module.exports.dashboardStats = async (req, res) => {
 
 module.exports.getSlots = async (req, res) => {
     const type = req.query.type || '';
-    console.log(type);
+
     if (type === '' || !['donate', 'request'].includes(type)) {
         return res.status(404).json({
             success: false,
@@ -255,6 +256,7 @@ module.exports.getSlots = async (req, res) => {
     }
     try {
         const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
         const threeDaysLater = new Date(currentDate);
         threeDaysLater.setDate(currentDate.getDate() + 3);
 

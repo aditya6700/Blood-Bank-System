@@ -36,7 +36,7 @@ export const DonateBlood = () => {
     try {
       const userId = user?._id; 
       const res = await api.post(`${bloodDonationRoute}/donate`, {
-        bloodGroup, quantity, disease, userId, appointmentSlot
+        bloodGroup, quantity, disease, userId, appointmentSlot: appointmentSlot + 'Z'
       });
       if (res.data.success) {
         setRequestMade(true);
@@ -129,8 +129,9 @@ export const DonateBlood = () => {
 
                    <AppointmentScheduler
                       handleChange={handleChange}
-                      requestDetails={donationDetails}  
-                    />    
+                      requestDetails={donationDetails} 
+                      type='donate'
+                    />  
 
                   <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 3 }}>

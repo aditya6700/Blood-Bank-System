@@ -37,7 +37,7 @@ export const RequestBlood = () => {
       const userType = user?.userType;
       const userId = user?._id;
       const res = await api.post(`${bloodRequestRoute}/${userType}/request`, {
-        bloodGroup, quantity, disease, userId, appointmentSlot
+        bloodGroup, quantity, disease, userId, appointmentSlot: appointmentSlot + 'Z'
       });
       if (res.data.success) {
         setRequestMade(true);
@@ -133,6 +133,7 @@ export const RequestBlood = () => {
                     <AppointmentScheduler
                       handleChange={handleChange}
                       requestDetails={requestDetails}  
+                      type='request'
                     />
 
                     <Form.Group as={Row} className="mb-3">

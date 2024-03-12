@@ -229,7 +229,8 @@ module.exports.resetPassword = async (req, res) => {
                 }
                 break;
             case 'password':
-                await Users.findOneAndUpdate({ _id }, { password, cpassword: password });
+                const hashedPassword = await bcrypt.hash(password, 12);
+                await Users.findOneAndUpdate({ _id }, { password: hashedPassword, cpassword: hashedPassword }, { new: true });
                 message = 'password changed'
                 success = true;
                 break;

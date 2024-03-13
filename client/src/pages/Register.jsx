@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { Button, Col, FloatingLabel, Form, Image, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { useRegister } from '../../hooks/useRegister';
-import AP from '../../assets/AP.png'
-import AM from '../../assets/AM.png'
-import BP from '../../assets/BP.png'
-import BM from '../../assets/BM.png'
-import OP from '../../assets/OP.png'
-import OM from '../../assets/OM.png'
-import ABP from '../../assets/ABP.png'
-import ABM from '../../assets/ABM.png'
+import { useRegister } from '../hooks/useRegister';
+import AP from '../assets/AP.png'
+import AM from '../assets/AM.png'
+import BP from '../assets/BP.png'
+import BM from '../assets/BM.png'
+import OP from '../assets/OP.png'
+import OM from '../assets/OM.png'
+import ABP from '../assets/ABP.png'
+import ABM from '../assets/ABM.png'
 
 const BLOODGROUPS = [
   { name: "A+", image: AP },
@@ -22,7 +22,7 @@ const BLOODGROUPS = [
   { name: "AB-", image: ABM }
 ];
 
-export default function RegisterModal({ setShowLogin, setShowRegister }) {
+export default function Register({ setShowLogin, setShowRegister }) {
 
   const [userDetails, setUserDetails] = useState({
     name: "", email: "", password: "", cpassword: "", userType: "", bloodGroup: "", city: ""

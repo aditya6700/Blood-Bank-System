@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Button, Card, Form, FloatingLabel, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { useLogin } from '../../hooks/useLogin';
+import { useLogin } from '../hooks/useLogin';
 
-export default function LoginModal({ setShowRegister, setShowLogin }) {
+export default function Login({ setShowRegister, setShowLogin }) {
 
   const [loginDetails, setLoginDetails] = useState({
     email: "", password: ""

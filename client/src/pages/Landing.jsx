@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import NavigationBar from '../components/NavigationBar'
 import { Container, Row, Button, Col } from 'react-bootstrap';
-import RegisterModal from './modals/RegisterModal';
-import LoginModal from './modals/LoginModal';
+import Register from './Register';
+import Login from './Login';
 
 
 export default function Landing() {
@@ -36,10 +36,10 @@ export default function Landing() {
             }
             
             {
-              showRegister  && <Col md={6}> <RegisterModal setShowLogin={setShowLogin} setShowRegister={setShowRegister} /> </Col>
+              showRegister  && <Col md={6}> <Register setShowLogin={setShowLogin} setShowRegister={setShowRegister} /> </Col>
             }
             {
-              showLogin && <Col md={6}> <LoginModal setShowLogin={setShowLogin} setShowRegister={setShowRegister} /> </Col>
+              showLogin && <Col md={6}> <Login setShowLogin={setShowLogin} setShowRegister={setShowRegister} /> </Col>
             }
             
           </Row>

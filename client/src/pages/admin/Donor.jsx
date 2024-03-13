@@ -119,7 +119,7 @@ export const Donor = () => {
           <Row>
             <ReactTable
               pageSize={8}
-              data={donorList}
+              data={donorList.reverse()}
               columns={columns}
               refreshTable={refreshTable}
             />

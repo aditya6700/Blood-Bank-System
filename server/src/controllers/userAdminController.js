@@ -31,7 +31,7 @@ module.exports.getDonors = async (req,res) => {
                 name: 1,
                 email: 1,
                 status: 1,
-                updatedAt: 1
+                createdAt: 1
             }
         );
         res.status(200).json({
@@ -57,7 +57,7 @@ module.exports.getPatients = async (req,res) => {
                 name: 1,
                 email: 1,
                 status: 1,
-                updatedAt: 1
+                createdAt: 1
             }
         );
         res.status(200).json({

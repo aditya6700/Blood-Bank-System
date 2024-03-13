@@ -118,7 +118,7 @@ export const Patient = () => {
           <Row>
             <ReactTable
               pageSize={8}
-              data={patientList}
+              data={patientList.reverse()}
               columns={columns}
               refreshTable={refreshTable}
             />

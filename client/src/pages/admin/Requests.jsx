@@ -122,7 +122,7 @@ export const Requests = () => {
           <Row>
             <ReactTable
               pageSize={8}
-              data={requests}
+              data={requests.reverse()}
               columns={columns}
               refreshTable={refreshTable}
             />

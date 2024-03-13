@@ -185,7 +185,7 @@ module.exports.changePassword = async (req,res) => {
         const hashOk = await bcrypt.compare(oldPassword, existingUser.password);
         if (!hashOk) {
             return res.status(401).json({
-                message: 'Wrong Old Password',
+                message: 'Existiting password is wrong.',
                 success: false,
             }); 
         }

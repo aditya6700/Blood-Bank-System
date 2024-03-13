@@ -8,7 +8,7 @@ export const AdminChat = () => {
 
   return (
     <>
-      <Container className='p-4 d-flex flex-column ' style={{ height: '100vh', overflowY: 'hidden' }} >
+      <Container className='p-4 ps-5 d-flex flex-column ' style={{ height: '100vh', overflowY: 'hidden' }} >
         <Row>
           <h3 className="text-left fs-1 mb-3 text-capitalize">Live Chat</h3>
         </Row>

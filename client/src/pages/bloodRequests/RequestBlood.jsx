@@ -91,7 +91,7 @@ export const RequestBlood = () => {
                 </Col>
               </> :
               <>
-                <Col sm={8} md={6}>
+                <Col sm={10} lg={8}>
                   <Form onSubmit={handleSubmit} >
                     <Form.Group as={Row} className="mb-3" controlId="name">
                       <Form.Label column sm={3}>

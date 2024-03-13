@@ -29,8 +29,8 @@ export const donorPatientHeaders = [
     },
   },
   {
-    dataField: "updatedAt",
-    text: "Last updated",
+    dataField: "createdAt",
+    text: "Registered Date",
     headerStyle: {
       backgroundColor: "#DEDADA",
       width: '10rem'

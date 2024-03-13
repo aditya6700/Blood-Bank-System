@@ -88,6 +88,7 @@ export const Requests = () => {
           <Button
             onClick={(e) => updateStatus(row, e.currentTarget.innerText)}
             variant={row.status === 'rejected' ? 'success' : 'danger'}
+            disabled={row.status === 'accepted' ? true : false}
             size="sm">
             {row.status === 'rejected' ? 'Accept' : 'Reject'}
           </Button>

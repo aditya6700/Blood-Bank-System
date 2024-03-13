@@ -62,7 +62,7 @@ export const ForgotPassword = () => {
       }
 
       try {
-        const { data } = await api.post(`${resetPasswordRoute}/password`, userData);
+        const { data } = await api.post(`${resetPasswordRoute}/password`, {email: userData.email, _id: userData._id, password: newPassword});
         if (data.success) {
           alert(data.message);
           navigate("/");

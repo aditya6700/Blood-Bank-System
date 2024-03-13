@@ -74,10 +74,10 @@ module.exports.getStock = async (req, res) => {
         let inventory = {}
         
         if (group) {
-            inventory = await Inventory.findOne({ bloodGroup: group });
+            inventory = await Inventory.findOne({ bloodGroup: group }).sort({ bloodGroup: 1 });
         } 
         else {
-            inventory = await Inventory.find();
+            inventory = await Inventory.find().sort({ bloodGroup: 1 });
         }
         
         res.status(200).json({

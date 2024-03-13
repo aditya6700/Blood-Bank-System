@@ -32,7 +32,7 @@ export const NonVerfiedUser = ({ status }) => {
     <>
       <div className='d-flex gap-2 align-items-center'>
         <p> Your status is not verified. Sync your status</p>
-        <Button className='mb-2' variant="outline-primary" title='refresh table' size='sm' onClick={updateUser} ><FaSync /></Button> 
+        <Button className='mb-2' variant="outline-primary" title='sync' size='sm' onClick={updateUser} ><FaSync /></Button> 
       </div>
       <p>Current status is <strong className='text-danger text-capitalize'>{status}</strong>.</p>
       <p>Contact your admin to get yourselves verified.</p>

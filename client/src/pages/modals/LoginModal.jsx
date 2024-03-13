@@ -3,7 +3,7 @@ import { Button, Card, Form, FloatingLabel, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useLogin } from '../../hooks/useLogin';
 
-export default function LoginModal({ handleUser }) {
+export default function LoginModal({ setShowRegister, setShowLogin }) {
 
   const [loginDetails, setLoginDetails] = useState({
     email: "", password: ""
@@ -21,10 +21,15 @@ export default function LoginModal({ handleUser }) {
     await login(loginDetails);
   }
 
+  const handleRegisterLogin = () => {
+    setShowRegister(true);
+    setShowLogin(false);
+  }
+
   return (
     <>
       <Row className="d-flex justify-content-center align-items-center p-2">
-        <h2 className="fw-bold mb-2 text-uppercase">Transfuse now</h2>
+        <h3 className="fw-bold mb-2 text-uppercase">Login</h3>
         <p className="mb-3">Login to start Transfusion!</p>
           <Card.Body>
             <Form className="mb-3" onSubmit={handleSubmit} >
@@ -55,7 +60,7 @@ export default function LoginModal({ handleUser }) {
               <div className="mt-3">  
                 <p className="mb-0  text-center">
                   Do you want to become a transfuser?{" "}
-                  <Link className="text-danger fw-bold" onClick={e => handleUser(false)} >Register</Link>
+                  <Link className="text-danger fw-bold" onClick={handleRegisterLogin} >Register</Link>
                 </p>
               </div>
             </Form>

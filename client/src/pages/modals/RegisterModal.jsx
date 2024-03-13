@@ -22,7 +22,7 @@ const BLOODGROUPS = [
   { name: "AB-", image: ABM }
 ];
 
-export default function RegisterModal({ handleUser }) {
+export default function RegisterModal({ setShowLogin, setShowRegister }) {
 
   const [userDetails, setUserDetails] = useState({
     name: "", email: "", password: "", cpassword: "", userType: "", bloodGroup: "", city: ""
@@ -33,22 +33,22 @@ export default function RegisterModal({ handleUser }) {
     return setUserDetails({ ...userDetails, [name]: value });
   }
 
-  const { register, error, isLoading } = useRegister();
+  const { register, isLoading } = useRegister(setShowLogin, setShowRegister);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     await register(userDetails);
-    if (!error) {
-      handleUser(true);
-    }
-    
+  }
+
+  const handleLogin = () => {
+    setShowRegister(false);
+    setShowLogin(true);
   }
 
   return (
     <>
       <Row className="d-flex justify-content-center align-items-center">
-        <h2 className="fw-bold mb-2 text-uppercase">transfuse now</h2>
+        <h3 className="fw-bold mb-2 text-uppercase">Register</h3>
         <p className="mb-3">Please enter your details to become a Transfuser!</p>
         <Form className="mb-3" onSubmit={handleSubmit}>
             
@@ -119,7 +119,7 @@ export default function RegisterModal({ handleUser }) {
           <div className="mt-3">
             <p className="mb-0  text-center">
               Already a Transfuser?{" "}
-              <Link className="text-danger fw-bold" onClick={e => handleUser(true)} >Login</Link>
+              <Link className="text-danger fw-bold" onClick={handleLogin} >Login</Link>
             </p>
           </div>
         </Form>

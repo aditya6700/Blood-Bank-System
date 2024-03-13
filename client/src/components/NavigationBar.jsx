@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import {Container, Nav, Navbar} from 'react-bootstrap';
 import { useAuthContext } from '../hooks/useAuthContext';
 
-export default function NavigationBar() {
+export default function NavigationBar({goHome}) {
   
   const { user } = useAuthContext();
 
@@ -29,8 +29,8 @@ export default function NavigationBar() {
   return (
     <>
       <Navbar className='my-navbar' collapseOnSelect expand="md" sticky="top">
-      <Container fluid className='mx-3' >
-        <Navbar.Brand as={NavLink} to='/' className='fw-bold'>Transfuse Now</Navbar.Brand>
+      <Container fluid className='mx-3'  >
+        <Navbar.Brand as={NavLink} to='/' onClick={goHome} className='fw-bold'>Transfuse Now</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>

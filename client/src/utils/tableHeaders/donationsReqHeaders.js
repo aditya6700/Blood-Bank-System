@@ -46,13 +46,14 @@ export const donationReqHeaders = [
     },
   },
   {
-    dataField: "updatedAt",
-    text: "Last updated",
+    dataField: "appointmentSlot",
+    text: "Appointment Date",
     headerStyle: {
       backgroundColor: "#DEDADA",
       width: '10rem'
     },
-    formatter: (cell) => cell ?  moment(cell).format('MMMM Do YYYY') : 'N/A'
+    sort: true,
+    formatter: (cell) => cell ? moment(cell).calendar() : 'N/A'
   },
   {
     dataField: "status",

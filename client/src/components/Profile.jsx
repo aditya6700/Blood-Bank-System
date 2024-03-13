@@ -50,7 +50,7 @@ export const Profile = () => {
         
       }
       else if (key === 'security') {
-        console.log("saving security data: ", securityData);
+        // console.log("saving security data: ", securityData);
         const { data } = await api.post(changePasswordRoute, {
           _id: user._id,
           oldPassword: securityData.oldPassword,

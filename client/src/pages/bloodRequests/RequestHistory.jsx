@@ -30,7 +30,7 @@ export const RequestHistory = () => {
 
       if (res.data.success) {
         setRequests(res.data.requestsList);
-        console.log(requests);
+        // console.log(requests);
       }
     }
     catch (err) {

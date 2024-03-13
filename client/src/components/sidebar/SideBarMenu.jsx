@@ -56,7 +56,7 @@ const SideBarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
   };
   const handleShow = () => setShow(true);
   const { logout } = useLogout();
-  const handleLogout = async () => await logout();
+  const handleLogout = async () => { setShow(false); await logout() };
 
   const LogoutModal = () => {
     return <Modal size="sm" show={show} onHide={handleClose} backdrop="static" >

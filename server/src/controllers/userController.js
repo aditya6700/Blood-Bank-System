@@ -8,17 +8,17 @@ module.exports.register = async (req, res) => {
 
     // basic validation
     if (!name || !email || !password || !cpassword || !userType || !bloodGroup) {
-        return res.status(422).json({
+        return res.status(400).json({
             message: "Every field must be filled", success: false
         });
     }
     else if (!city) {
-        return res.status(422).json({
+        return res.status(400).json({
             message: "Security Question is required", success: false
         });
     }
     else if (password !== cpassword) {
-        return res.status(422).json({
+        return res.status(400).json({
             message: "password and confirm password must be same", success: false
         });
     }
@@ -27,7 +27,7 @@ module.exports.register = async (req, res) => {
         // Find a user by email if exists throw error
         const duplicateUser = await Users.findOne({ email });
         if (duplicateUser) {
-            return res.status(406).json({
+            return res.status(409).json({
                 message: 'A user already exists with same email',
                 error: duplicateUser,
                 success: false``
@@ -47,7 +47,7 @@ module.exports.register = async (req, res) => {
         if (err.name === "MongoError" || err.name === "MongoServerError") {
             // MongoDB-related error
             console.log("MongoDB Error:", err.message);
-            res.status(422).json({
+            res.status(500).json({
                 message: 'Error occured while registering',
                 success: false,
                 error: err.message
@@ -55,7 +55,7 @@ module.exports.register = async (req, res) => {
         } else {
             // Other types of errors
             console.log("Generic Error:", err);
-            res.status(422).json({
+            res.status(500).json({
                 message: 'unknown error',
                 success: false,
                 error: err
@@ -71,7 +71,7 @@ module.exports.login = async (req, res) => {
 
     // validation
     if (!email || !password ) {
-        return res.status(422).json({
+        return res.status(400).json({
             message: "email and password are required", success: false
         });
     }
@@ -116,7 +116,7 @@ module.exports.login = async (req, res) => {
 
     }
     catch (err) {
-        res.status(422).json({
+        res.status(500).json({
             message: 'unknown error',
             success: false,
             error: err.message
@@ -148,7 +148,7 @@ module.exports.logout = async (req,res) => {
     }
     catch (err) {
         // console.log(err);
-        res.status(422).json({
+        res.status(500).json({
             message: 'Logout failed!!',
             success: false,
             error: err.message
@@ -161,14 +161,14 @@ module.exports.updateuser = async (req,res) => {
     const { _id, name, email, phone } = req.body;
     try {
         const updatedUser = await Users.findOneAndUpdate({ _id }, { name, email, phone }, {new: true});
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'profile updated',
             updatedUser,
             success: true
         });
 
     } catch (error) {
-        return res.status(404).json({
+        return res.status(500).json({
             message: 'Failed to update',
             success: false,
             error: error.message
@@ -184,20 +184,20 @@ module.exports.changePassword = async (req,res) => {
         const existingUser = await Users.findOne({ _id });
         const hashOk = await bcrypt.compare(oldPassword, existingUser.password);
         if (!hashOk) {
-            return res.status(404).json({
+            return res.status(401).json({
                 message: 'Wrong Old Password',
                 success: false,
             }); 
         }
         const password = await bcrypt.hash(newPassword, 12);
         const updatedUser = await Users.findOneAndUpdate({ _id }, { password, cpassword: password });
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'password changed successfully',
             success: true
         });
 
     } catch (error) {
-        return res.status(404).json({
+        return res.status(500).json({
             message: 'password change failed',
             success: false,
             error: error.message
@@ -222,7 +222,7 @@ module.exports.resetPassword = async (req, res) => {
                     message = 'email verified'
                     success = true
                 } else {
-                    return res.status(404).json({
+                    return res.status(401).json({
                         message: 'invalid user',
                         success: false
                     });
@@ -237,16 +237,43 @@ module.exports.resetPassword = async (req, res) => {
                 break;
         }
 
-        return res.status(201).json({
+        return res.status(200).json({
             message,
             validUser,
             success: true
         });
 
     } catch (error) {
-        return res.status(404).json({
+        return res.status(500).json({
             message: 'reset password failed',
             success: false,
+            error: error.message
+        });
+    }
+}
+
+module.exports.findUser = async (req,res) => {
+    const id = req.query.id || '';
+    try {
+        
+        let result = {};
+
+        if (id) {
+            result = await Users.findOne({ _id: id });
+        }
+        else {
+            result = await Users.find();
+        }
+        res.status(200).json({
+            success: true,
+            message: 'fetched user details',
+            user: result
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Failed to query users',
             error: error.message
         });
     }

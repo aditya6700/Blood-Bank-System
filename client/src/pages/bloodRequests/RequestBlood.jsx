@@ -4,6 +4,7 @@ import axios from 'axios';
 import { bloodRequestRoute } from '../../utils/ApiRoutes';
 import { NonVerfiedUser } from '../../components/NonVerfiedUser';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import AppointmentScheduler from '../../components/AppointmentScheduler';
 
 export const RequestBlood = () => {
 
@@ -14,7 +15,7 @@ export const RequestBlood = () => {
   const [requestId, setRequestId] = useState('');
 
   const [requestDetails, setrRquestDetails] = useState({
-    bloodGroup: user.bloodGroup, quantity: 0,disease: ''
+    bloodGroup: user.bloodGroup, quantity: 0,disease: '', appointmentSlot: ''
   });
   
   const handleChange = (event) => {
@@ -31,12 +32,12 @@ export const RequestBlood = () => {
   
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { bloodGroup, quantity, disease } = requestDetails;
+    const { bloodGroup, quantity, disease, appointmentSlot } = requestDetails;
     try {
       const userType = user?.userType;
       const userId = user?._id;
       const res = await api.post(`${bloodRequestRoute}/${userType}/request`, {
-        bloodGroup, quantity, disease, userId
+        bloodGroup, quantity, disease, userId, appointmentSlot: appointmentSlot + 'Z'
       });
       if (res.data.success) {
         setRequestMade(true);
@@ -55,7 +56,7 @@ export const RequestBlood = () => {
     setRequestId('');
     setRequestError(undefined);
     setrRquestDetails({
-      bloodGroup: '', quantity: 0, disease: ''
+      bloodGroup: user.bloodGroup, quantity: 0, disease: '', appointmentSlot: ''
     });
   }
 
@@ -128,6 +129,12 @@ export const RequestBlood = () => {
                         <Form.Control className='border-2' min={1} max={10} type="number" placeholder="0" name="quantity" value={requestDetails.quantity} onChange={handleChange} required />
                       </Col>
                     </Form.Group>
+                     
+                    <AppointmentScheduler
+                      handleChange={handleChange}
+                      requestDetails={requestDetails}  
+                      type='request'
+                    />
 
                     <Form.Group as={Row} className="mb-3">
                       <Col sm={{ span: 10, offset: 3 }}>

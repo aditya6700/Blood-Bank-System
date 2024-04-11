@@ -28,6 +28,16 @@ const userSchema = mongoose.Schema({
         require: true,
         unique: true
     },
+    phone: {
+        type: Number,
+        require: false,
+        unique: true
+    },
+    city: {
+        type: String,
+        require: true,
+        unique: false
+    },
     userType: {
         type: String,
         require: true,

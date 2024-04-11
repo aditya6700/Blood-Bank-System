@@ -36,7 +36,7 @@ export default function ReactTable({refreshTable, pageSize, data, columns}) {
             }
           </PaginationProvider>
         </div>
-        <p className="m-0"> <span style={{ fontWeight: 'bold', color: 'red'}}>Note:</span>  You can sort by Name and Status</p>
+        <p className="m-0"> <span style={{ fontWeight: 'bold', color: 'red'}}>Note:</span>  You can sort by Name, Status and Date</p>
     </>
   )
 }

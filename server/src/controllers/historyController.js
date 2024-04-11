@@ -4,20 +4,20 @@ const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 const typeList = ["donate", "request"];
 
 module.exports.donorRequest = async (req, res) => {
-    const { bloodGroup, quantity, userId, disease } = req.body;
+    const { bloodGroup, quantity, userId, disease, appointmentSlot } = req.body;
     const type = req.params.type;
 
     const userType = 'donor', status = 'pending';
 
     // some validations
     if (!typeList.includes(type)) {
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: `Invalid request = ${type}`
         });
     }
     else if (!bloodGroups.includes(bloodGroup)) {
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: `Invalid blood group ${bloodGroup}`
         });
@@ -25,7 +25,7 @@ module.exports.donorRequest = async (req, res) => {
 
     try {
 
-        const donorHistRec = new RequestHistory({ bloodGroup, quantity, type, disease, status, user: userId, userType });
+        const donorHistRec = new RequestHistory({ bloodGroup, quantity, type, disease, status, user: userId, userType, appointmentSlot });
         const donorRequestHistRec = await donorHistRec.save();
         await donorRequestHistRec.populate({
             path: 'user',
@@ -45,7 +45,7 @@ module.exports.donorRequest = async (req, res) => {
         else if (type === 'request') {
             message = 'Failed to make a blood request'
         }
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message,
             error: error.message
@@ -54,13 +54,13 @@ module.exports.donorRequest = async (req, res) => {
 }
 
 module.exports.patientRequest = async (req, res) => {
-    const { bloodGroup, quantity, userId, disease } = req.body;
+    const { bloodGroup, quantity, userId, disease, appointmentSlot } = req.body;
 
     const type = 'request', userType = 'patient', status = 'pending';
 
     // some validations
     if (!bloodGroups.includes(bloodGroup)) {
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: `Invalid blood group ${bloodGroup}`
         });
@@ -68,7 +68,7 @@ module.exports.patientRequest = async (req, res) => {
 
     try {
 
-        const patientHistRec = new RequestHistory({ bloodGroup, quantity, disease, type, status, user: userId, userType });
+        const patientHistRec = new RequestHistory({ bloodGroup, quantity, disease, type, status, user: userId, userType, appointmentSlot });
         const patientRequestHistRec = await patientHistRec.save();
         await patientRequestHistRec.populate({
             path: 'user',
@@ -81,7 +81,7 @@ module.exports.patientRequest = async (req, res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to make a blood request',
             error: error.message
@@ -104,7 +104,7 @@ module.exports.getRequestsHistory = async (req, res) => {
             disease: request.disease,
             bloodGroup: request.bloodGroup,
             quantity: request.quantity,
-            updatedAt: request.updatedAt,
+            appointmentSlot: request.appointmentSlot,
             status: request.status
         }));
   
@@ -115,7 +115,7 @@ module.exports.getRequestsHistory = async (req, res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             message: 'Failed to fetch requests list',
             success: false,
             error: error.message
@@ -139,7 +139,7 @@ module.exports.getDonationsHistory = async (req,res) => {
             quantity: donation.quantity,
             status: donation.status,
             disease: donation.disease,
-            updatedAt: donation.updatedAt
+            appointmentSlot: donation.appointmentSlot
         }));
   
         res.status(200).json({
@@ -149,7 +149,7 @@ module.exports.getDonationsHistory = async (req,res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             message: 'Failed to fetch donations list',
             success: false,
             error: error.message
@@ -162,7 +162,7 @@ module.exports.dashboardStats = async (req, res) => {
     const userList = ['donor', 'patient'];
 
     if (!userList.includes(userType)) {
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: `Invalid user ${userType}`
         });
@@ -229,16 +229,46 @@ module.exports.dashboardStats = async (req, res) => {
 
             return res.status(200).json({
                 success: true,
-                userStats: { accepted: patientReqAccept[0].totalQuantity, pending: patientPendingReq, recentTransfusers }
+                userStats: { accepted: patientReqAccept[0]?.totalQuantity || 0, pending: patientPendingReq, recentTransfusers }
             });
         }
         
         
     } catch (error) {
         console.log(error)
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to get misc stats',
+            error: error.message
+        });
+    }
+}
+
+module.exports.getSlots = async (req, res) => {
+    const type = req.query.type || '';
+
+    if (type === '' || !['donate', 'request'].includes(type)) {
+        return res.status(404).json({
+            success: false,
+            message: `invalid type for fetching slots: ${type}`
+        });
+    }
+    try {
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
+        const threeDaysLater = new Date(currentDate);
+        threeDaysLater.setDate(currentDate.getDate() + 3);
+
+        let bookedSlots = await RequestHistory.find({ type, status: 'pending', appointmentSlot: { $gte: currentDate, $lt: threeDaysLater } }, { appointmentSlot: 1 });
+        return res.status(200).json({
+            success: true,
+            bookedSlots,
+            message: "successfully fetched available slots"
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: `Failed to get slots for ${type}`,
             error: error.message
         });
     }

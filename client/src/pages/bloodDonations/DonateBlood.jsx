@@ -4,6 +4,7 @@ import { bloodDonationRoute } from '../../utils/ApiRoutes';
 import axios from 'axios';
 import { NonVerfiedUser } from '../../components/NonVerfiedUser';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import AppointmentScheduler from '../../components/AppointmentScheduler';
 
 export const DonateBlood = () => {
 
@@ -14,7 +15,7 @@ export const DonateBlood = () => {
   const [requestId, setRequestId] = useState('');
 
   const [donationDetails, setDonationDetails] = useState({
-    bloodGroup: user.bloodGroup, quantity: 0, disease: ''
+    bloodGroup: user.bloodGroup, quantity: 0, disease: '', appointmentSlot: ''
   });
   
   const handleChange = (event) => {
@@ -31,11 +32,11 @@ export const DonateBlood = () => {
   
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { bloodGroup, quantity, disease } = donationDetails;
+    const { bloodGroup, quantity, disease, appointmentSlot } = donationDetails;
     try {
       const userId = user?._id; 
       const res = await api.post(`${bloodDonationRoute}/donate`, {
-        bloodGroup, quantity, disease, userId
+        bloodGroup, quantity, disease, userId, appointmentSlot: appointmentSlot + 'Z'
       });
       if (res.data.success) {
         setRequestMade(true);
@@ -54,7 +55,7 @@ export const DonateBlood = () => {
     setRequestId('');
     setRequestError(undefined);
     setDonationDetails({
-      bloodGroup: '', quantity: 0, disease: ''
+      bloodGroup: user.bloodGroup, quantity: 0, disease: '', appointmentSlot: ''
     });
   }
 
@@ -69,7 +70,7 @@ export const DonateBlood = () => {
         {
           requestMade ?
             <>
-              <Col sm={8} md={6}>
+              <Col sm={10} md={10}>
                 {
                   !requestError ?
                     <>
@@ -88,7 +89,7 @@ export const DonateBlood = () => {
               </Col>
             </> :
             <>
-              <Col sm={8} md={6}>
+              <Col sm={10} lg={8}>
                 <Form onSubmit={handleSubmit} >
                   <Form.Group as={Row} className="mb-3" controlId="name">
                     <Form.Label column sm={3}>
@@ -125,6 +126,12 @@ export const DonateBlood = () => {
                       <Form.Control className='border-2' min={1} max={5} type="number" placeholder="0" name="quantity" value={donationDetails.quantity} onChange={handleChange} required />
                     </Col>
                   </Form.Group>
+
+                   <AppointmentScheduler
+                      handleChange={handleChange}
+                      requestDetails={donationDetails} 
+                      type='donate'
+                    />  
 
                   <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 3 }}>

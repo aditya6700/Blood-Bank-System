@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { menuList } from '../../utils/menuList';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
-import { Logout } from '../Logout';
+import { FaBars, FaUserCircle } from 'react-icons/fa';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import SideBarMenu from './SideBarMenu';
+import Badge from 'react-bootstrap/Badge';
 
 export const Sidebar = () => {
   const { user } = useAuthContext();
   const userType = user?.userType;
   const location = useLocation();
+  const userName = user?.name.split(' ')[0];
 
   const [isOpen, setIsOpen] = useState(true);
 
@@ -52,8 +54,6 @@ export const Sidebar = () => {
           animate={animateOptions}
           className={`sidebar `}
         >
-        <div className='h-100 d-flex flex-column'>
-          <div>
             <div className="top_section">
               <AnimatePresence>
                 {isOpen && (
@@ -76,13 +76,22 @@ export const Sidebar = () => {
             <section className="routes">
             {
               menuList.filter(item => userType === item.userType || item.userType === "common").map((route, index) => {
+                if (route.subRoutes) {
+                return (
+                  <SideBarMenu
+                    setIsOpen={setIsOpen}
+                    route={route}
+                    showAnimation={showAnimation}
+                    isOpen={isOpen}
+                    key={index}
+                  />
+                );
+              }
                 return (
                   <NavLink
                     to={route.path}
                     key={index}
                     className={`link ${route.path === location.pathname ? 'active' : ''}`}
-                    // className="link"
-                    // activeClassName="active"
                   >
                     <div className="icon">{route.icon}</div>
                     <AnimatePresence>
@@ -94,7 +103,7 @@ export const Sidebar = () => {
                           exit="hidden"
                           className="link_text"
                         >
-                          {route.name}
+                          {route.name}  
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -102,11 +111,9 @@ export const Sidebar = () => {
                 );
               })
             }
-            </section>
-          </div>
-          <div className='user_section'>
-             <Logout />
-             <AnimatePresence>
+            <div className='link user-info'>
+              <div className="icon"><FaUserCircle /></div>
+              <AnimatePresence>
                 {isOpen && (
                   <motion.div
                     variants={showAnimation}
@@ -115,12 +122,12 @@ export const Sidebar = () => {
                     exit="hidden"
                     className="link_text"
                   >
-                      {user.name} 
+                  {userName} <Badge pill style={{fontSize: '12px'}} bg="danger" text="white"> {userType} </Badge>
                   </motion.div>
                 )}
               </AnimatePresence>
-          </div>
-        </div>
+            </div>
+          </section>
         </motion.div>
       )}
     </>

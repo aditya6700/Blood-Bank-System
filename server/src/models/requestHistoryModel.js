@@ -33,6 +33,10 @@ const requestHistorySchema = mongoose.Schema({
         enum: ['admin', 'donor', 'patient'],
         required: true
     },
+    appointmentSlot: {
+        type: Date,
+        required: true,
+    },
     disease: String
 }, { timestamps: true });
 

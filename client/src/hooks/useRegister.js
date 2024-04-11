@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { registerRoute } from "../utils/ApiRoutes";
 
-export const useRegister = () => {
+export const useRegister = (setShowLogin, setShowRegister) => {
 
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
@@ -54,7 +54,7 @@ export const useRegister = () => {
 
     if (userType === '') {
       toast.error(
-        "Who are you?",
+        "Who are you? Donor or Patient?",
         toastOptions
       );
       validated = false;
@@ -75,10 +75,13 @@ export const useRegister = () => {
   
         if(res.data.success) {
           toast.success('You are now a Transfuser!!', toastOptions);
+          setShowLogin(true);
+          setShowRegister(false)
         };
+        
       }
       catch (err) {
-        setError(err.response.data.error);
+        setError(err.response.data.message);
         toast.error(err.response.data.message, toastOptions);
       }
       finally {
@@ -86,10 +89,13 @@ export const useRegister = () => {
       }
       
     } else {
-      setError(false);
+      setError('validation error');
+      setIsLoading(false);
+      setShowLogin(false);
+      setShowRegister(true);
     }
-    
+
   };
 
-  return {register, isLoading, error}
+  return { register, isLoading, error }
 }

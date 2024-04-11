@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {Container, Nav, Navbar} from 'react-bootstrap';
-import { Logout } from './Logout';
 import { useAuthContext } from '../hooks/useAuthContext';
 
-export default function NavigationBar() {
+export default function NavigationBar({goHome}) {
   
   const { user } = useAuthContext();
 
@@ -14,7 +13,6 @@ export default function NavigationBar() {
         <>
           <Navbar.Text className="nav-link d-flex flex-row text-capitalize"><span className="fas fa-user me-2 fs-5"></span> {user.userType}</Navbar.Text>
           <Navbar.Text className='fw-bold'>{user.name}</Navbar.Text>
-          <Logout />
         </>
       )
     }
@@ -31,8 +29,8 @@ export default function NavigationBar() {
   return (
     <>
       <Navbar className='my-navbar' collapseOnSelect expand="md" sticky="top">
-      <Container fluid className='mx-3' >
-        <Navbar.Brand as={NavLink} to='/' className='fw-bold'>Transfuse Now</Navbar.Brand>
+      <Container fluid className='mx-3'  >
+        <Navbar.Brand as={NavLink} to='/' onClick={goHome} className='fw-bold'>Transfuse Now</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>

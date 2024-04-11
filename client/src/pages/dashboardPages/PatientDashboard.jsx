@@ -8,6 +8,7 @@ import oBlood from '../../assets/oBlood.png'
 import aBlood from '../../assets/aBlood.png'
 import bBlood from '../../assets/bBlood.png'
 import abBlood from '../../assets/abBlood.png'
+import lifeSaved from '../../assets/LifeSaved.png'
 
 export const PatientDashboard = () => {
 
@@ -48,7 +49,7 @@ export const PatientDashboard = () => {
       
           <Row className='patient-dash h-100' >
             <Col md={8}>
-              <div className='h-75 img-container text-center patient-img'>
+              <div className='img-container text-center patient-img'>
                 {
                   user.bloodGroup === 'A+' || user.bloodGroup === 'A-' ? <Image src={aBlood} /> :
                     user.bloodGroup === 'B+' || user.bloodGroup === 'B-' ? <Image src={bBlood} /> :
@@ -63,21 +64,28 @@ export const PatientDashboard = () => {
               <div className='h-auto text-center text-capitalize fw-bold fs-1 text-danger'>we hope for your safer health</div>
             </Col>
             <Col md={4}>
-              {
-                dashboardData.recentTransfusers && dashboardData.recentTransfusers.length > 0 ? (
-                  <>
-                    <h3>Recently donated persons....</h3>
-                    <br />
-                    {
-                      dashboardData.recentTransfusers.map((item, index) => {
-                        return (
-                          <p key={index} className='fs-4'>{item}</p>
-                        )
-                      })
-                    }
-                  </>
-                ) : null
-              }
+              <Row>
+                {
+                  dashboardData.recentTransfusers && dashboardData.recentTransfusers.length > 0 ? (
+                    <>
+                      <h3>Recently donated persons....</h3>
+                        <br />
+                        <div className="donations-list">
+                          {
+                        dashboardData.recentTransfusers.map((item, index) => {
+                          return (
+                            <p key={index} className='fs-4'>{item}</p>
+                          )
+                        })
+                        }
+                      </div>
+                    </>
+                  ) : null
+                }
+              </Row>
+              <Row>
+                <Image src={lifeSaved}></Image>
+              </Row>
             </Col>
           </Row>
       }

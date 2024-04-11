@@ -10,6 +10,7 @@ export default function SidebarContainer({ children }) {
   const location = useLocation();
   // console.log(location.pathname)
 
+
   return (
     <>
       {
@@ -17,10 +18,10 @@ export default function SidebarContainer({ children }) {
         (
           <Container fluid> 
             <Row className="h-100"> 
-              <Sidebar />
+              <Sidebar/>
               <Col className='p-0 ms-5 m-sm-auto'>
                 <Container className='' style={{ height: '100vh', overflowY: 'auto' }} >
-                  {children} 
+                    {children} 
                 </Container>
               </Col>
             </Row>

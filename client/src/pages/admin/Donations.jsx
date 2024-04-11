@@ -86,6 +86,7 @@ export const Donations = () => {
         return (  <>
           <Button
             onClick={(e) => updateStatus(row._id, row.bloodGroup, row.quantity, e.currentTarget.innerText)}
+            disabled={row.status === 'accepted' ? true : false}
             variant={row.status === 'rejected' ? 'success' : 'danger'}
             size="sm">
             {row.status === 'rejected' ? 'Accept' : 'Reject'}
@@ -120,7 +121,7 @@ export const Donations = () => {
           <Row>
             <ReactTable
               pageSize={8}
-              data={donations}
+              data={donations.reverse()}
               columns={columns}
               refreshTable={refreshTable}
             />

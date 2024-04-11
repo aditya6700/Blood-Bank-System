@@ -7,7 +7,7 @@ module.exports.adminControls = async (req, res) => {
     // validation
     const paramValidationError = paramsValidation(user, type, status);
     if (paramValidationError) {
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: paramValidationError
         });
@@ -15,7 +15,7 @@ module.exports.adminControls = async (req, res) => {
 
     const bodyValidationError = bodyValidation(req.body);
     if (bodyValidationError){
-        return res.status(422).json({
+        return res.status(400).json({
             success: false,
             message: bodyValidationError
         });
@@ -79,7 +79,7 @@ const donorDonation = async (status, req, res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to accept donation request',
             error: error.message
@@ -136,7 +136,7 @@ const donorRequest = async (status, req, res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to accept donor request',
             error: error.message
@@ -192,7 +192,7 @@ const patientRequest = async (status, req, res) => {
         });
     }
     catch (error) {
-        res.status(422).json({
+        res.status(500).json({
             success: false,
             message: 'Failed to accept patient request',
             error: error.message

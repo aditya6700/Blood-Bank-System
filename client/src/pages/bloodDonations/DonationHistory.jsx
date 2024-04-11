@@ -30,7 +30,7 @@ export const DonationHistory = () => {
 
       if (res.data.success) {
         setDonations(res.data.donationsList);
-        console.log(donations);
+        // console.log(donations);
       }
     }
     catch (err) {

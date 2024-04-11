@@ -40,7 +40,7 @@ module.exports.subtractStock = async (bloodGroup, quantity) => {
         }
         else {
             console.log("wrong subraction")
-            throw new Error(`Requested ${quantity} units are not avilable`);
+            throw new Error(`Requested ${quantity} units are not available`);
         }
 
         return updatedInventory;

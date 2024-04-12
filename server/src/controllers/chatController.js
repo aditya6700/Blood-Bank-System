@@ -25,7 +25,7 @@ module.exports.createChat = async (req,res) => {
         })
     }
     catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({
             success: false,
             message: 'error creating chat',
@@ -45,7 +45,7 @@ module.exports.findUserChats = async (req, res) => {
         });
     }
     catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({
             success: false,
             message: 'failed to fetch user chat',
@@ -66,7 +66,7 @@ module.exports.findChat = async (req, res) => {
         });
     }
     catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({
             success: false,
             message: 'failed to fetch chats',

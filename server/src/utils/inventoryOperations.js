@@ -39,7 +39,7 @@ module.exports.subtractStock = async (bloodGroup, quantity) => {
             updatedInventory = await Inventory.findOneAndUpdate(filter, updateQuanity, options);
         }
         else {
-            console.log("wrong subraction")
+            // console.log("wrong subraction")
             throw new Error(`Requested ${quantity} units are not available`);
         }
 

@@ -46,7 +46,7 @@ module.exports.register = async (req, res) => {
     catch (err) {
         if (err.name === "MongoError" || err.name === "MongoServerError") {
             // MongoDB-related error
-            console.log("MongoDB Error:", err.message);
+            // console.log("MongoDB Error:", err.message);
             res.status(500).json({
                 message: 'Error occured while registering',
                 success: false,
@@ -54,7 +54,7 @@ module.exports.register = async (req, res) => {
             });
         } else {
             // Other types of errors
-            console.log("Generic Error:", err);
+            // console.log("Generic Error:", err);
             res.status(500).json({
                 message: 'unknown error',
                 success: false,

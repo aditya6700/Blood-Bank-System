@@ -11,7 +11,7 @@ module.exports.createMessage = async (req, res) => {
             messages: message
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({
             success: false,
             message: 'error creating message',
@@ -30,7 +30,7 @@ module.exports.getMessages = async (req, res) => {
             messages: messages
         });
     } catch (error) {
-         console.log(error);
+        //  console.log(error);
         res.status(500).json({
             success: false,
             message: 'error finding chat message',
